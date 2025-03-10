@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/features/profile/presentation/widgets/edit_profile_page/custom_snack_bar.dart';
-import 'package:eventure/features/settings/presentation/blocs/change_pass_bloc/change_password_bloc.dart';
-import 'package:eventure/features/settings/presentation/blocs/change_pass_bloc/change_password_event.dart';
-import 'package:eventure/features/settings/presentation/blocs/change_pass_bloc/change_password_state.dart';
-import 'package:eventure/features/settings/presentation/widgets/change_pass_widgets/header_widget.dart';
+import 'package:eventure/features/profile/settings/presentation/blocs/change_pass_bloc/change_password_bloc.dart';
+import 'package:eventure/features/profile/settings/presentation/blocs/change_pass_bloc/change_password_event.dart';
+import 'package:eventure/features/profile/settings/presentation/blocs/change_pass_bloc/change_password_state.dart';
+import 'package:eventure/features/profile/settings/presentation/widgets/change_pass_widgets/header_widget.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:eventure/core/utils/theme/colors.dart';

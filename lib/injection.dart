@@ -1,4 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eventure/features/auth/domain/interfaces/auth_service.dart';
+import 'package:eventure/features/auth/domain/interfaces/biometric_service.dart';
+import 'package:eventure/features/auth/domain/interfaces/user_repository.dart';
+import 'package:eventure/features/auth/infrastructure/biometric/local_biometric_service.dart';
+import 'package:eventure/features/auth/infrastructure/firebase/firebase_auth_service.dart';
+import 'package:eventure/features/auth/infrastructure/firebase/firebase_user_repository.dart';
+import 'package:eventure/features/auth/presentation/blocs/auth_bloc/auth_bloc.dart';
 import 'package:eventure/features/events/data/datasources/event_datasource.dart';
 import 'package:eventure/features/events/data/datasources/local_notification_settings.dart';
 import 'package:eventure/features/events/data/repositories/event_repo_impl.dart';
@@ -37,6 +44,7 @@ import 'package:eventure/features/events/presentation/blocs/save_btn/save_btn_bl
 import 'package:eventure/features/events/presentation/blocs/scroll/scroll_bloc.dart';
 import 'package:eventure/features/events/presentation/blocs/user_data/user_data_cubit.dart';
 import 'package:eventure/features/events/presentation/blocs/users_images/users_images_bloc.dart';
+import 'package:eventure/features/splash/presentation/bloc/splash_bloc.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -57,9 +65,31 @@ void init() {
   getIt.registerLazySingleton<FirebaseMessaging>(
     () => FirebaseMessaging.instance,
   );
+//splash
+  getIt.registerFactory(() => SplashBloc(
+    authService: getIt<IAuthService>(),
+    userRepository: getIt<IUserRepository>(),
+  ));
 
   // Auth Feature //////////////////////////////////////////////////////////////
-//
+
+  getIt.registerFactory(() => AuthBloc(
+    authService: getIt<IAuthService>(),
+    biometricService: getIt<IBiometricService>(),
+  ));
+  getIt.registerSingleton<IUserRepository>(
+    FirebaseUserRepository(),
+  );
+
+  // Then register the auth service with the repository
+  getIt.registerSingleton<IAuthService>(
+    FirebaseAuthService(userRepository: getIt<IUserRepository>()),
+  );
+
+  // Register biometric service
+  getIt.registerSingleton<IBiometricService>(
+    LocalBiometricService(),
+  );
 //
 //
 //

@@ -1,5 +1,5 @@
-import 'package:eventure/features/settings/presentation/blocs/change_pass_bloc/change_password_event.dart';
-import 'package:eventure/features/settings/presentation/blocs/change_pass_bloc/change_password_state.dart';
+import 'package:eventure/features/profile/settings/presentation/blocs/change_pass_bloc/change_password_event.dart';
+import 'package:eventure/features/profile/settings/presentation/blocs/change_pass_bloc/change_password_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
