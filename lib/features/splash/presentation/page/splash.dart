@@ -47,6 +47,7 @@ class SplashView extends StatelessWidget {
         final arrowSwiperColor = isDarkMode ? kButton : kMainDark ;
 
         return Scaffold(
+
           backgroundColor: backgroundColor,
           // floatingActionButton: FloatingActionButton(
           //   backgroundColor: accentColor,
