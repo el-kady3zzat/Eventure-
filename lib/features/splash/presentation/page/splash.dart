@@ -48,20 +48,20 @@ class SplashView extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: backgroundColor,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: accentColor,
-            child: Icon(
-              isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: textColor,
-            ),
-            onPressed: () {
-              context.read<ThemeCubit>().toggleTheme();
-              UI.infoSnack(
-                context,
-                'settings.theme_changed'.tr(),
-              );
-            },
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   backgroundColor: accentColor,
+          //   child: Icon(
+          //     isDarkMode ? Icons.light_mode : Icons.dark_mode,
+          //     color: textColor,
+          //   ),
+          //   onPressed: () {
+          //     context.read<ThemeCubit>().toggleTheme();
+          //     UI.infoSnack(
+          //       context,
+          //       'settings.theme_changed'.tr(),
+          //     );
+          //   },
+          // ),
           body: Stack(
             children: [
               // Background Decorations
@@ -362,8 +362,8 @@ class SplashView extends StatelessWidget {
           fontSize: SizeConfig.defaultSize! * 2,
           fontWeight: FontWeight.bold,
         ),
-        onSubmit: () {
-          Future.delayed(
+        onSubmit: () async {
+          await Future.delayed(
             const Duration(milliseconds: 100),
                 () {
               if (state is SplashErrorState) {
