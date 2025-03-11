@@ -20,29 +20,43 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kWhite : kMainDark;
-    final textColor = isDarkMode ? kMainDark : kWhite;
+    final backgroundColor = isDarkMode ? kWhite : kPrimaryDark;
+    final textColor = isDarkMode ? kPrimaryDark : kWhite;
     return StatefulBuilder(builder: (context, setState) {
       return Stack(
         alignment: Alignment.bottomRight,
         children: [
-          CircleAvatar(radius:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 100.r: 75.r, backgroundImage: img),
+          CircleAvatar(
+              radius:
+                  MediaQuery.of(context).orientation == Orientation.landscape
+                      ? 100.r
+                      : 75.r,
+              backgroundImage: img),
           InkWell(
             onTap: () {
               showBottomSheet(context, backgroundColor, textColor);
             },
             child: Container(
-              padding: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? EdgeInsets.all(5.w):EdgeInsets.all(7.w),
+              padding:
+                  MediaQuery.of(context).orientation == Orientation.landscape
+                      ? EdgeInsets.all(5.w)
+                      : EdgeInsets.all(7.w),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: kHeader,
-                border: Border.all(color: kMainDark, width:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 1.5.w: 2.8.w),
+                color: kPrimaryLight,
+                border: Border.all(
+                    color: kPrimaryDark,
+                    width: MediaQuery.of(context).orientation ==
+                            Orientation.landscape
+                        ? 1.5.w
+                        : 2.8.w),
               ),
-              child: Icon(Icons.edit_outlined, color: kWhite, size:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 12.w: 20.w),
+              child: Icon(Icons.edit_outlined,
+                  color: kWhite,
+                  size: MediaQuery.of(context).orientation ==
+                          Orientation.landscape
+                      ? 12.w
+                      : 20.w),
             ),
           ),
         ],
@@ -67,7 +81,7 @@ class ProfileImage extends StatelessWidget {
                 ListTile(
                   leading: Icon(Icons.camera_alt, color: Colors.blue),
                   title: Text(
-                   'profile.camera'.tr(),
+                    'profile.camera'.tr(),
                     style: TextStyle(color: txt),
                   ),
                   onTap: () {

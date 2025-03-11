@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
+import 'package:eventure/features/events/presentation/pages/notifications_settings_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/about_us_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/change_password_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/contact_screen.dart';
-import 'package:eventure/features/profile/settings/presentation/pages/settings_options/notifications_screen.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/privacy_page.dart';
 import 'package:eventure/features/profile/settings/presentation/widgets/logout_button_widget.dart';
+import 'package:eventure/features/profile/settings/presentation/widgets/settings_item.dart';
 import 'package:eventure/features/profile/settings/presentation/widgets/settings_option_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -13,11 +14,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-    final textColor = isDarkMode ? kWhite : kMainDark;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -47,7 +50,7 @@ class SettingsPage extends StatelessWidget {
                 fun: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NotificationsScreen()),
+                      builder: (context) => NotificationsSettingsPage()),
                 ),
               ),
               SettingsOption(
@@ -58,6 +61,8 @@ class SettingsPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ChangePasswordPage()),
                 ),
               ),
+              SettingsItem(title: 'events.theme'.tr(), icon: Icons.light),
+              SettingsItem(title: 'events.language'.tr(), icon: Icons.language),
               SettingsOption(
                 icon: LucideIcons.helpCircle,
                 title: 'settings_screen.contact_us'.tr(),

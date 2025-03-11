@@ -27,7 +27,7 @@ class Price extends StatelessWidget {
           style: TextStyle(
             fontSize: SizeConfig.size(p: 12.sp, l: 5.sp),
             fontWeight: FontWeight.bold,
-            color: kHeader,
+            color: kPrimaryLight,
           ),
         ),
       ],

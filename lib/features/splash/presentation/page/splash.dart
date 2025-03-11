@@ -38,16 +38,16 @@ class SplashView extends StatelessWidget {
     final isRTL = context.locale.languageCode == 'ar';
     return BlocBuilder<ThemeCubit, bool>(
       builder: (context, isDarkMode) {
-        final backgroundColor = isDarkMode ? kMainDark : kButton.withValues(alpha: 0.8);
-        final textColor = isDarkMode ? Colors.white : kMainLight;
-        final textSwiperColor = isDarkMode ? kMainDark : Colors.white;
-        final accentColor = isDarkMode ? kButton : Colors.white ;
-        final swiperColor = isDarkMode ? kButton : kMainDark ;
-        final swiperInnerColor = isDarkMode ? kMainDark : kButton ;
-        final arrowSwiperColor = isDarkMode ? kButton : kMainDark ;
+        final backgroundColor =
+            isDarkMode ? kPrimaryDark : kButton.withValues(alpha: 0.8);
+        final textColor = isDarkMode ? Colors.white : kSecondaryDark;
+        final textSwiperColor = isDarkMode ? kPrimaryDark : Colors.white;
+        final accentColor = isDarkMode ? kButton : Colors.white;
+        final swiperColor = isDarkMode ? kButton : kPrimaryDark;
+        final swiperInnerColor = isDarkMode ? kPrimaryDark : kButton;
+        final arrowSwiperColor = isDarkMode ? kButton : kPrimaryDark;
 
         return Scaffold(
-
           backgroundColor: backgroundColor,
           // floatingActionButton: FloatingActionButton(
           //   backgroundColor: accentColor,
@@ -70,7 +70,7 @@ class SplashView extends StatelessWidget {
                 top: -50,
                 right: -30,
                 child: _buildDecorativeShape(
-                  color: accentColor.withValues(alpha:0.1),
+                  color: accentColor.withValues(alpha: 0.1),
                   size: 150,
                   shape: BoxShape.circle,
                 ),
@@ -90,7 +90,7 @@ class SplashView extends StatelessWidget {
                 child: Transform.rotate(
                   angle: 0.3,
                   child: _buildDecorativeShape(
-                    color: accentColor.withValues(alpha:0.07),
+                    color: accentColor.withValues(alpha: 0.07),
                     size: 120,
                     borderRadius: 20,
                   ),
@@ -102,7 +102,7 @@ class SplashView extends StatelessWidget {
                 child: Transform.rotate(
                   angle: -0.5,
                   child: _buildDecorativeShape(
-                    color: accentColor.withValues(alpha:0.04),
+                    color: accentColor.withValues(alpha: 0.04),
                     size: 80,
                     borderRadius: 15,
                   ),
@@ -115,7 +115,9 @@ class SplashView extends StatelessWidget {
                     if (state is SplashNavigationState) {
                       Navigator.of(context).pushReplacement(
                         CustomPageRoute(
-                          child: state.isLoggedIn ? const HomePage() : const LoginScreen(),
+                          child: state.isLoggedIn
+                              ? const HomePage()
+                              : const LoginScreen(),
                           type: PageTransitionType.slideUp,
                           duration: const Duration(seconds: 3),
                           curve: Curves.easeInOutCubic,
@@ -128,19 +130,38 @@ class SplashView extends StatelessWidget {
                     }
                   },
                   builder: (context, state) {
-                    if (state is SplashLoadingState || state is SplashInitialState) {
+                    if (state is SplashLoadingState ||
+                        state is SplashInitialState) {
                       return Center(
                         child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(accentColor),
                         ),
                       );
                     }
 
                     return Directionality(
-                      textDirection: isRTL ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+                      textDirection:
+                          isRTL ? ui.TextDirection.rtl : ui.TextDirection.ltr,
                       child: SizeConfig.isPortrait()
-                          ? _buildPortraitLayout(context, state, textColor, accentColor,swiperColor,arrowSwiperColor,swiperInnerColor,textSwiperColor)
-                          : _buildLandscapeLayout(context, state, textColor, accentColor,swiperColor,arrowSwiperColor,swiperInnerColor,textSwiperColor),
+                          ? _buildPortraitLayout(
+                              context,
+                              state,
+                              textColor,
+                              accentColor,
+                              swiperColor,
+                              arrowSwiperColor,
+                              swiperInnerColor,
+                              textSwiperColor)
+                          : _buildLandscapeLayout(
+                              context,
+                              state,
+                              textColor,
+                              accentColor,
+                              swiperColor,
+                              arrowSwiperColor,
+                              swiperInnerColor,
+                              textSwiperColor),
                     );
                   },
                 ),
@@ -172,8 +193,14 @@ class SplashView extends StatelessWidget {
   }
 
   Widget _buildPortraitLayout(
-      BuildContext context, SplashState state, Color textColor, Color accentColor,
-      Color swiperColor,Color arrowSwiperColor,Color textSwiperColor,Color swiperInnerColor) {
+      BuildContext context,
+      SplashState state,
+      Color textColor,
+      Color accentColor,
+      Color swiperColor,
+      Color arrowSwiperColor,
+      Color textSwiperColor,
+      Color swiperInnerColor) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 2),
       child: Column(
@@ -193,7 +220,8 @@ class SplashView extends StatelessWidget {
               ],
             ),
           ),
-          _buildSwipeButton(context, state, textColor, accentColor,swiperColor,arrowSwiperColor,swiperColor,textSwiperColor),
+          _buildSwipeButton(context, state, textColor, accentColor, swiperColor,
+              arrowSwiperColor, swiperColor, textSwiperColor),
           SizedBox(height: SizeConfig.defaultSize! * 1.5),
         ],
       ),
@@ -201,8 +229,14 @@ class SplashView extends StatelessWidget {
   }
 
   Widget _buildLandscapeLayout(
-      BuildContext context, SplashState state, Color textColor, Color accentColor,Color swiperColor,
-      Color arrowSwiperColor,Color swiperInnerColor,Color textSwiperColor) {
+      BuildContext context,
+      SplashState state,
+      Color textColor,
+      Color accentColor,
+      Color swiperColor,
+      Color arrowSwiperColor,
+      Color swiperInnerColor,
+      Color textSwiperColor) {
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: SizeConfig.defaultSize! * 2,
@@ -221,7 +255,15 @@ class SplashView extends StatelessWidget {
                 SizedBox(height: SizeConfig.defaultSize!),
                 _buildDescriptionText(textColor),
                 const Spacer(),
-                _buildSwipeButton(context, state, textColor, accentColor,swiperColor,arrowSwiperColor,swiperInnerColor,textSwiperColor),
+                _buildSwipeButton(
+                    context,
+                    state,
+                    textColor,
+                    accentColor,
+                    swiperColor,
+                    arrowSwiperColor,
+                    swiperInnerColor,
+                    textSwiperColor),
                 const Spacer(),
               ],
             ),
@@ -239,7 +281,9 @@ class SplashView extends StatelessWidget {
     return Text(
       'splash.app_name'.tr(),
       style: TextStyle(
-        fontSize: SizeConfig.size(p: SizeConfig.screenWidth! * 0.1, l: SizeConfig.screenHeight! * 0.1),
+        fontSize: SizeConfig.size(
+            p: SizeConfig.screenWidth! * 0.1,
+            l: SizeConfig.screenHeight! * 0.1),
         fontWeight: FontWeight.normal,
         color: accentColor,
       ),
@@ -329,8 +373,14 @@ class SplashView extends StatelessWidget {
   }
 
   Widget _buildSwipeButton(
-      BuildContext context, SplashState state, Color textColor, Color accentColor,
-      Color swiperColor,Color arrowSwiperColor,Color swiperInnerColor,Color textSwiperColor) {
+      BuildContext context,
+      SplashState state,
+      Color textColor,
+      Color accentColor,
+      Color swiperColor,
+      Color arrowSwiperColor,
+      Color swiperInnerColor,
+      Color textSwiperColor) {
     final GlobalKey<SlideActionState> _key = GlobalKey();
     return SizedBox(
       width: SizeConfig.size(
@@ -345,7 +395,7 @@ class SplashView extends StatelessWidget {
         key: _key,
         borderRadius: SizeConfig.defaultSize! * 3,
         elevation: 0,
-        innerColor: context.watch<ThemeCubit>().state ? kMainDark : kButton,
+        innerColor: context.watch<ThemeCubit>().state ? kPrimaryDark : kButton,
         outerColor: swiperColor,
         sliderButtonIcon: Icon(
           context.locale.languageCode == 'ar'
@@ -355,18 +405,18 @@ class SplashView extends StatelessWidget {
           size: SizeConfig.defaultSize! * 2,
         ),
         text: (state is SplashLoggedInState
-            ? 'splash.continue_home'
-            : 'splash.get_started')
+                ? 'splash.continue_home'
+                : 'splash.get_started')
             .tr(),
         textStyle: TextStyle(
-          color: context.watch<ThemeCubit>().state ? kMainDark : kButton,
+          color: context.watch<ThemeCubit>().state ? kPrimaryDark : kButton,
           fontSize: SizeConfig.defaultSize! * 2,
           fontWeight: FontWeight.bold,
         ),
         onSubmit: () async {
           await Future.delayed(
             const Duration(milliseconds: 100),
-                () {
+            () {
               if (state is SplashErrorState) {
                 context.read<SplashBloc>().add(CheckLoginStatusEvent());
               } else {

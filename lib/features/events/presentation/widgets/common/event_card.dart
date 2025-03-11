@@ -1,3 +1,4 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/widgets/common/favorite_btn.dart';
@@ -15,6 +16,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
 
     return GestureDetector(
       onTap: () =>
@@ -43,9 +45,9 @@ class EventCard extends StatelessWidget {
                     margin: REdgeInsets.symmetric(horizontal: 15),
                     child: Card(
                       elevation: 10,
-                      shadowColor: kHeader,
+                      shadowColor: kPrimaryLight,
                       margin: EdgeInsets.zero,
-                      color: kDetails,
+                      color: UI.isDarkMode() ? kDetails : kPrimaryLight,
                       child: Padding(
                         padding:
                             REdgeInsets.symmetric(horizontal: 15, vertical: 8),

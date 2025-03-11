@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
@@ -5,7 +6,6 @@ import 'package:eventure/features/events/presentation/blocs/save_btn/save_btn_bl
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:share_plus/share_plus.dart';
 
 class DetailsTitle extends StatelessWidget {
@@ -170,10 +170,10 @@ class DetailsTitle extends StatelessWidget {
   void _updateSave(BuildContext context, bool isSaved) {
     if (isSaved) {
       context.read<SaveBtnBloc>().add(RemoveFromSaveIds(eventId));
-      UI.successSnack(context, 'Event Removed from Saved List');
+      UI.successSnack(context, 'events.event_removed'.tr());
     } else {
       context.read<SaveBtnBloc>().add(AddToSaveIds(eventId));
-      UI.successSnack(context, 'Event Added to Saved List');
+      UI.successSnack(context, 'events.event_added'.tr());
     }
   }
 

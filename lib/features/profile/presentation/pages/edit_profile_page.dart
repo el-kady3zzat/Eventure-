@@ -45,14 +45,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
     context.read<EditProfileBloc>().add(SubscribeProfile());
     _nameController.text = widget.name;
     _emailController.text = widget.email;
-    _phoneNumberController.text = widget.phone.isEmpty ? 'messages.n_a'.tr() : widget.phone;
+    _phoneNumberController.text =
+        widget.phone.isEmpty ? 'messages.n_a'.tr() : widget.phone;
   }
 
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-    final textColor = isDarkMode ? kWhite : kMainDark;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
     final screenWidth = MediaQuery.of(context).size.width;
     final horizontalPadding = screenWidth * 0.01;
 
@@ -74,7 +75,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       icon: Icon(
                         Icons.arrow_back_ios,
                         size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 15.sp:21.w,
+                                Orientation.landscape
+                            ? 15.sp
+                            : 21.w,
                         color: textColor,
                       ),
                       onPressed: () {
@@ -83,11 +86,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                     Spacer(flex: 1),
                     Text(
-                     'profile.edit'.tr(),
+                      'profile.edit'.tr(),
                       style: TextStyle(
                         color: textColor,
                         fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 12.sp:17.sp,
+                                Orientation.landscape
+                            ? 12.sp
+                            : 17.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -151,11 +156,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       SizedBox(height: 25.h),
                       // Name Field
                       CustomInputField(
-                          label: 'profile.full_name'.tr(), controller: _nameController),
+                          label: 'profile.full_name'.tr(),
+                          controller: _nameController),
                       SizedBox(height: 12.h),
                       // Email Field
                       CustomInputField(
-                          label: 'profile.email'.tr(), controller: _emailController),
+                          label: 'profile.email'.tr(),
+                          controller: _emailController),
                       SizedBox(height: 11.h),
                       // Phone Field
                       CustomInputField(
@@ -182,7 +189,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   ));
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: kHeader,
+                              backgroundColor: kPrimaryLight,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.r),
                               ),

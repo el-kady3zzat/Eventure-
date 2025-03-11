@@ -7,7 +7,8 @@ class SettingsOption extends StatelessWidget {
   final String title;
   final Function? fun;
 
-  const SettingsOption({required this.icon, required this.title, this.fun, super.key});
+  const SettingsOption(
+      {required this.icon, required this.title, this.fun, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +32,13 @@ class SettingsOption extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: kWhite,
               radius: SizeConfig.size(p: 20, l: 25),
-              child: Icon(icon, color: kHeader, size: SizeConfig.size(p: 20, l: 24)),
+              child: Icon(icon,
+                  color: kPrimaryLight, size: SizeConfig.size(p: 20, l: 24)),
             ),
             title: Text(
               title,
-              style: TextStyle(color: kWhite, fontSize: SizeConfig.size(p: 15, l: 18)),
+              style: TextStyle(
+                  color: kWhite, fontSize: SizeConfig.size(p: 15, l: 18)),
             ),
             trailing: Icon(
               Icons.arrow_forward_ios,

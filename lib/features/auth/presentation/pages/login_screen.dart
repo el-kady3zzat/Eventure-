@@ -21,7 +21,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 
-
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -60,12 +59,13 @@ class _LoginViewState extends State<LoginView> {
 
     return BlocBuilder<ThemeCubit, bool>(
       builder: (context, isDarkMode) {
-        final backgroundColor = isDarkMode ? kMainDark : Colors.white;
+        final backgroundColor = isDarkMode ? kPrimaryDark : Colors.white;
         final backgroundButton = isDarkMode ? kScaffoldLight : kDetails;
-        final textColor = isDarkMode ? Colors.white : kMainLight;
-        final subTextColor = isDarkMode ? Colors.white : kMainLight.withValues(alpha: 0.7);
+        final textColor = isDarkMode ? Colors.white : kSecondaryDark;
+        final subTextColor =
+            isDarkMode ? Colors.white : kSecondaryDark.withValues(alpha: 0.7);
         final accentColor = isDarkMode ? kButton : kButton;
-        final dividerColor = isDarkMode ? kPreIcon : kMainDark;
+        final dividerColor = isDarkMode ? kPreIcon : kPrimaryDark;
 
         return BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -73,22 +73,24 @@ class _LoginViewState extends State<LoginView> {
               UI.infoSnack(context, state.message.tr());
             } else if (state is ValidationSuccess) {
               context.read<AuthBloc>().add(
-                SignInRequested(
-                  email: _emailController.text.trim(),
-                  password: _passwordController.text,
-                ),
-              );
+                    SignInRequested(
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text,
+                    ),
+                  );
             } else if (state is ValidationError) {
               UI.errorSnack(context, state.message.tr());
             } else if (state is AuthSuccess) {
               UI.successSnack(context, state.message.tr());
-              Navigator.of(context).pushReplacement(
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => HomePage()),
+                (Route<dynamic> route) => false,
               );
             } else if (state is GoogleSignInSuccess) {
               UI.successSnack(context, state.message.tr());
-              Navigator.of(context).pushReplacement(
+              Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => HomePage()),
+                (Route<dynamic> route) => false,
               );
             } else if (state is AuthError ||
                 state is GoogleSignInError ||
@@ -96,10 +98,11 @@ class _LoginViewState extends State<LoginView> {
               UI.errorSnack(
                 context,
                 (state is AuthError
-                    ? state.message
-                    : state is GoogleSignInError
-                    ? state.message
-                    : (state as ResetPasswordError).message).tr(),
+                        ? state.message
+                        : state is GoogleSignInError
+                            ? state.message
+                            : (state as ResetPasswordError).message)
+                    .tr(),
               );
             } else if (state is ResetPasswordSuccess) {
               UI.successSnack(context, state.message.tr());
@@ -114,13 +117,25 @@ class _LoginViewState extends State<LoginView> {
                     child: SingleChildScrollView(
                       padding: EdgeInsets.symmetric(
                         horizontal: SizeConfig.defaultSize! * 2,
-                        vertical: SizeConfig.defaultSize!*0.2,
+                        vertical: SizeConfig.defaultSize! * 0.2,
                       ),
                       child: Form(
                         key: _formKey,
                         child: SizeConfig.isPortrait()
-                            ? _buildPortraitLayout(state, textColor, accentColor,subTextColor,dividerColor,backgroundButton)
-                            : _buildLandscapeLayout(state, textColor, accentColor,dividerColor,backgroundButton,subTextColor),
+                            ? _buildPortraitLayout(
+                                state,
+                                textColor,
+                                accentColor,
+                                subTextColor,
+                                dividerColor,
+                                backgroundButton)
+                            : _buildLandscapeLayout(
+                                state,
+                                textColor,
+                                accentColor,
+                                dividerColor,
+                                backgroundButton,
+                                subTextColor),
                       ),
                     ),
                   ),
@@ -135,7 +150,13 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  Widget _buildPortraitLayout(AuthState state, Color textColor, Color accentColor,Color subTextColor,Color dividerColor,Color backgroundButton) {
+  Widget _buildPortraitLayout(
+      AuthState state,
+      Color textColor,
+      Color accentColor,
+      Color subTextColor,
+      Color dividerColor,
+      Color backgroundButton) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -179,44 +200,55 @@ class _LoginViewState extends State<LoginView> {
                     decoration: BoxDecoration(
                       color: backgroundButton, // Lighter background
                       borderRadius: BorderRadius.horizontal(
-                        right: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
-                        left: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
+                        right: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
+                        left: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
                       ),
                     ),
                     padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.defaultSize! * 0.9,  // Reduced padding
+                      vertical:
+                          SizeConfig.defaultSize! * 0.9, // Reduced padding
                       horizontal: SizeConfig.defaultSize! * 1,
                     ),
                     child: TextButton(
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ResetPasswordScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const ResetPasswordScreen()),
                       ),
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Remove button padding
-                        minimumSize: Size.zero, // Remove minimum size constraint
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduce tap target
+                        minimumSize:
+                            Size.zero, // Remove minimum size constraint
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Reduce tap target
                       ),
                       child: Text(
                         'auth.forgot_password'.tr(),
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: SizeConfig.defaultSize! * 1.5, // Smaller font
+                          fontSize:
+                              SizeConfig.defaultSize! * 1.5, // Smaller font
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: SizeConfig.defaultSize!*16), // Reduced spacing
+                  SizedBox(
+                      width: SizeConfig.defaultSize! * 16), // Reduced spacing
                   Container(
                     decoration: BoxDecoration(
                       color: backgroundButton, // Lighter background
                       borderRadius: BorderRadius.horizontal(
-                        right: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
-                        left: Radius.circular(SizeConfig.defaultSize! * 3),  // Smaller radius
+                        right: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
+                        left: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
                       ),
                     ),
                     padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.defaultSize! * 0.9, // Reduced padding
+                      vertical:
+                          SizeConfig.defaultSize! * 0.9, // Reduced padding
                       horizontal: SizeConfig.defaultSize! * 1,
                     ),
                     child: TextButton(
@@ -225,14 +257,17 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Remove button padding
-                        minimumSize: Size.zero, // Remove minimum size constraint
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduce tap target
+                        minimumSize:
+                            Size.zero, // Remove minimum size constraint
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Reduce tap target
                       ),
                       child: Text(
                         'auth.sign_up'.tr(),
                         style: TextStyle(
                           color: kButton,
-                          fontSize: SizeConfig.defaultSize! * 1.5, // Smaller font
+                          fontSize:
+                              SizeConfig.defaultSize! * 1.5, // Smaller font
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -247,13 +282,18 @@ class _LoginViewState extends State<LoginView> {
         _buildDivider(dividerColor),
         SizedBox(height: SizeConfig.defaultSize! * 2),
         _buildGoogleSignIn(textColor),
-        SizedBox(height: SizeConfig.defaultSize! *0.5),
-
+        SizedBox(height: SizeConfig.defaultSize! * 0.5),
       ],
     );
   }
 
-  Widget _buildLandscapeLayout(AuthState state, Color textColor, Color accentColor,Color dividerColor,Color backgroundButton,Color subTextColor) {
+  Widget _buildLandscapeLayout(
+      AuthState state,
+      Color textColor,
+      Color accentColor,
+      Color dividerColor,
+      Color backgroundButton,
+      Color subTextColor) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -264,7 +304,8 @@ class _LoginViewState extends State<LoginView> {
           child: Column(
             children: [
               Container(
-                height: SizeConfig.screenHeight! * 0.65, // Reduced height to fit Google part
+                height: SizeConfig.screenHeight! *
+                    0.65, // Reduced height to fit Google part
                 child: SvgPicture.asset(
                   'assets/images/Mobile login-amico.svg',
                   fit: BoxFit.contain,
@@ -312,56 +353,67 @@ class _LoginViewState extends State<LoginView> {
                 scale: 0.90,
                 child: _buildLoginForm(textColor, accentColor),
               ),
-              SizedBox(height: SizeConfig.defaultSize!*1.7),
+              SizedBox(height: SizeConfig.defaultSize! * 1.7),
 
               // Forgot Password and Sign Up in a row
               Row(
                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                 children: [
-                  SizedBox(width: SizeConfig.defaultSize!*2),
+                  SizedBox(width: SizeConfig.defaultSize! * 2),
                   Container(
                     decoration: BoxDecoration(
                       color: backgroundButton, // Lighter background
                       borderRadius: BorderRadius.horizontal(
-                        right: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
-                        left: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
+                        right: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
+                        left: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
                       ),
                     ),
                     padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.defaultSize! * 0.9,  // Reduced padding
+                      vertical:
+                          SizeConfig.defaultSize! * 0.9, // Reduced padding
                       horizontal: SizeConfig.defaultSize! * 1,
                     ),
                     child: TextButton(
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ResetPasswordScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const ResetPasswordScreen()),
                       ),
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Remove button padding
-                        minimumSize: Size.zero, // Remove minimum size constraint
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduce tap target
+                        minimumSize:
+                            Size.zero, // Remove minimum size constraint
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Reduce tap target
                       ),
                       child: Text(
                         'auth.forgot_password'.tr(),
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: SizeConfig.defaultSize! * 1.5, // Smaller font
+                          fontSize:
+                              SizeConfig.defaultSize! * 1.5, // Smaller font
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: SizeConfig.defaultSize!*18), // Reduced spacing
+                  SizedBox(
+                      width: SizeConfig.defaultSize! * 18), // Reduced spacing
                   Container(
                     decoration: BoxDecoration(
                       color: backgroundButton, // Lighter background
                       borderRadius: BorderRadius.horizontal(
-                        right: Radius.circular(SizeConfig.defaultSize! * 3), // Smaller radius
-                        left: Radius.circular(SizeConfig.defaultSize! * 3),  // Smaller radius
+                        right: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
+                        left: Radius.circular(
+                            SizeConfig.defaultSize! * 3), // Smaller radius
                       ),
                     ),
                     padding: EdgeInsets.symmetric(
-                      vertical: SizeConfig.defaultSize! * 0.9, // Reduced padding
+                      vertical:
+                          SizeConfig.defaultSize! * 0.9, // Reduced padding
                       horizontal: SizeConfig.defaultSize! * 1,
                     ),
                     child: TextButton(
@@ -370,14 +422,17 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.zero, // Remove button padding
-                        minimumSize: Size.zero, // Remove minimum size constraint
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Reduce tap target
+                        minimumSize:
+                            Size.zero, // Remove minimum size constraint
+                        tapTargetSize: MaterialTapTargetSize
+                            .shrinkWrap, // Reduce tap target
                       ),
                       child: Text(
                         'auth.sign_up'.tr(),
                         style: TextStyle(
                           color: kButton,
-                          fontSize: SizeConfig.defaultSize! * 1.5, // Smaller font
+                          fontSize:
+                              SizeConfig.defaultSize! * 1.5, // Smaller font
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -401,7 +456,6 @@ class _LoginViewState extends State<LoginView> {
           margin: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize!),
           padding: EdgeInsets.all(SizeConfig.defaultSize! * 1.5),
           decoration: BoxDecoration(
-
             color: kDetails,
             borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
           ),
@@ -450,8 +504,6 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-
-
   Widget _buildDivider(Color dividerColor) {
     return Row(
       children: [
@@ -490,14 +542,14 @@ class _LoginViewState extends State<LoginView> {
           children: [
             FaIcon(
               FontAwesomeIcons.google,
-              color: kMainDark,
+              color: kPrimaryDark,
               size: SizeConfig.defaultSize! * 1.7,
             ),
             SizedBox(width: SizeConfig.defaultSize!),
             Text(
               'auth.continue_with_google'.tr(),
               style: TextStyle(
-                color: kMainDark,
+                color: kPrimaryDark,
                 fontSize: SizeConfig.defaultSize! * 1.6,
                 fontWeight: FontWeight.w500,
               ),
@@ -508,15 +560,13 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-
-
   void _handleLogin() {
     context.read<AuthBloc>().add(
-      ValidateLoginFields(
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-      ),
-    );
+          ValidateLoginFields(
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+          ),
+        );
   }
 
   Future<void> _handleGoogleSignIn() async {

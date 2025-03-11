@@ -16,7 +16,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kMainLight,
+      backgroundColor: kSecondaryDark,
       body: SafeArea(
         child: Column(
           children: [
@@ -59,7 +59,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         CircleAvatar(
                           backgroundColor: kWhite,
                           child: Icon(LucideIcons.bell,
-                              color: kHeader, size: 20.w),
+                              color: kPrimaryLight, size: 20.w),
                         ),
                         SizedBox(
                           width: 8.w,
@@ -74,7 +74,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                 showAllNotifications = val;
                               });
                             },
-                            activeColor: kHeader,
+                            activeColor: kPrimaryLight,
                             inactiveThumbColor: kDetails),
                       ],
                     ),
@@ -128,7 +128,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: kHeader,
+            activeColor: kPrimaryLight,
             inactiveThumbColor: kDetails,
           ),
         ],

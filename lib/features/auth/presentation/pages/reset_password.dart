@@ -32,6 +32,7 @@ class ResetPasswordView extends StatefulWidget {
   @override
   State<ResetPasswordView> createState() => _ResetPasswordViewState();
 }
+
 class _ResetPasswordViewState extends State<ResetPasswordView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -50,9 +51,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
 
     return BlocBuilder<ThemeCubit, bool>(
       builder: (context, isDarkMode) {
-        final backgroundColor = isDarkMode ? kMainDark : Colors.white;
-        final textColor = isDarkMode ? Colors.white : kMainLight;
-        final subTextColor = isDarkMode ? Colors.white70 : kMainLight.withValues(alpha: 0.7);
+        final backgroundColor = isDarkMode ? kPrimaryDark : Colors.white;
+        final textColor = isDarkMode ? Colors.white : kSecondaryDark;
+        final subTextColor =
+            isDarkMode ? Colors.white70 : kSecondaryDark.withValues(alpha: 0.7);
 
         return BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -83,8 +85,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       child: Form(
                         key: _formKey,
                         child: SizeConfig.isPortrait()
-                            ? _buildPortraitLayout(state, textColor, subTextColor)
-                            : _buildLandscapeLayout(state, textColor, subTextColor),
+                            ? _buildPortraitLayout(
+                                state, textColor, subTextColor)
+                            : _buildLandscapeLayout(
+                                state, textColor, subTextColor),
                       ),
                     ),
                   ),
@@ -116,7 +120,9 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       ),
     );
   }
-  Widget _buildPortraitLayout(AuthState state, Color textColor, Color subTextColor) {
+
+  Widget _buildPortraitLayout(
+      AuthState state, Color textColor, Color subTextColor) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,8 +131,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             width: SizeConfig.screenWidth! * 0.8,
             height: SizeConfig.screenHeight! * 0.30,
             decoration: BoxDecoration(
-              color: context.watch<ThemeCubit>().state ? kMainLight : kDetails,
-              borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
+              color:
+                  context.watch<ThemeCubit>().state ? kSecondaryDark : kDetails,
+              borderRadius:
+                  BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
             ),
             padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
             child: SvgPicture.asset(
@@ -158,7 +166,8 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
     );
   }
 
-  Widget _buildLandscapeLayout(AuthState state, Color textColor, Color subTextColor) {
+  Widget _buildLandscapeLayout(
+      AuthState state, Color textColor, Color subTextColor) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -169,8 +178,11 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
             padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
             child: Container(
               decoration: BoxDecoration(
-                color: context.watch<ThemeCubit>().state ? kMainLight : kDetails,
-                borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
+                color: context.watch<ThemeCubit>().state
+                    ? kSecondaryDark
+                    : kDetails,
+                borderRadius:
+                    BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
               ),
               padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
               child: Center(
@@ -223,6 +235,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
       ],
     );
   }
+
   Widget _buildResetForm(Color textColor) {
     return Stack(
       clipBehavior: Clip.none,
@@ -271,10 +284,10 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
   void _handleResetPassword() {
     if (_formKey.currentState?.validate() ?? false) {
       context.read<AuthBloc>().add(
-        ResetPasswordRequested(
-          email: _emailController.text.trim(),
-        ),
-      );
+            ResetPasswordRequested(
+              email: _emailController.text.trim(),
+            ),
+          );
     } else {
       UI.errorSnack(
         context,

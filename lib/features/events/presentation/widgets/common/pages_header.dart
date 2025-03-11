@@ -20,7 +20,7 @@ class PagesHeader extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: kWhite,
                   fontSize: SizeConfig.size(p: 18.sp, l: 8.sp),
                   fontWeight: FontWeight.bold,
                 ),

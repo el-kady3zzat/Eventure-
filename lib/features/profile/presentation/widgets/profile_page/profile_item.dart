@@ -8,46 +8,44 @@ class ProfileItem extends StatelessWidget {
   final IconData icon;
   final bool? isObscure;
 
- 
-   ProfileItem({
+  ProfileItem({
     super.key,
     required this.txt,
     required this.icon,
     this.isObscure,
-   
-  
   });
 
   @override
   Widget build(BuildContext context) {
-
- final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final Color bg = isDarkMode ? kWhite : kMainDark;
-    final Color textColor = isDarkMode ? kWhite : kMainDark;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final Color bg = isDarkMode ? kWhite : kPrimaryDark;
+    final Color textColor = isDarkMode ? kWhite : kPrimaryDark;
 
     return ListTile(
       title: Text(
         isObscure == true ? txt : txt.replaceAll(RegExp(r"."), "*"),
         style: TextStyle(
-          fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 12.sp : 18.sp,
+          fontSize: MediaQuery.of(context).orientation == Orientation.landscape
+              ? 12.sp
+              : 18.sp,
           fontWeight: FontWeight.w600,
           color: textColor,
         ),
       ),
       leading: Container(
-        padding: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? EdgeInsets.all(5).w : EdgeInsets.all(9).w,
+        padding: MediaQuery.of(context).orientation == Orientation.landscape
+            ? EdgeInsets.all(5).w
+            : EdgeInsets.all(9).w,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
         ),
         child: CircleAvatar(
           backgroundColor: bg,
-          child: Icon(icon, color: kHeader, size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 12.sp:  20.w),
+          child: Icon(icon,
+              color: kPrimaryLight,
+              size: MediaQuery.of(context).orientation == Orientation.landscape
+                  ? 12.sp
+                  : 20.w),
         ),
       ),
     );

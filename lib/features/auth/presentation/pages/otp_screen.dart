@@ -49,7 +49,8 @@ class OTPVerificationView extends StatefulWidget {
   State<OTPVerificationView> createState() => _OTPVerificationViewState();
 }
 
-class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsBindingObserver {
+class _OTPVerificationViewState extends State<OTPVerificationView>
+    with WidgetsBindingObserver {
   late final TextEditingController textEditingController;
   late final StreamController<ErrorAnimationType> errorController;
   late final FocusNode focusNode;
@@ -149,9 +150,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
 
     return BlocBuilder<ThemeCubit, bool>(
       builder: (context, isDarkMode) {
-        final backgroundColor = isDarkMode ? kMainDark : Colors.white;
-        final textColor = isDarkMode ? Colors.white : kMainLight;
-        final subTextColor = isDarkMode ? Colors.white70 : kMainLight;
+        final backgroundColor = isDarkMode ? kPrimaryDark : Colors.white;
+        final textColor = isDarkMode ? Colors.white : kSecondaryDark;
+        final subTextColor = isDarkMode ? Colors.white70 : kSecondaryDark;
 
         return PopScope(
           canPop: !_isNavigating,
@@ -166,7 +167,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
           },
           child: BlocConsumer<AuthBloc, AuthState>(
             listenWhen: (previous, current) =>
-            !_isDisposed && !_isNavigating && mounted,
+                !_isDisposed && !_isNavigating && mounted,
             listener: (context, state) {
               if (state is PhoneNumberVerificationSent) {
                 if (mounted) {
@@ -191,7 +192,7 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                     if (mounted) {
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => HomePage()),
-                            (route) => false,
+                        (route) => false,
                       );
                     }
                   });
@@ -255,8 +256,10 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
           child: Container(
             height: double.infinity,
             decoration: BoxDecoration(
-              color: context.watch<ThemeCubit>().state ? kDetails : kMainLight,
-              borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
+              color:
+                  context.watch<ThemeCubit>().state ? kDetails : kSecondaryDark,
+              borderRadius:
+                  BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
             ),
             margin: EdgeInsets.all(SizeConfig.defaultSize! * 2),
             padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
@@ -308,7 +311,8 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                 Container(
                   decoration: BoxDecoration(
                     color: kDetails,
-                    borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.2),
+                    borderRadius:
+                        BorderRadius.circular(SizeConfig.defaultSize! * 1.2),
                   ),
                   padding: EdgeInsets.all(SizeConfig.defaultSize! * 1.2),
                   child: Column(
@@ -323,14 +327,17 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                           animationType: AnimationType.fade,
                           pinTheme: PinTheme(
                             shape: PinCodeFieldShape.box,
-                            borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.2),
+                            borderRadius: BorderRadius.circular(
+                                SizeConfig.defaultSize! * 1.2),
                             fieldHeight: SizeConfig.defaultSize! * 4.5,
                             fieldWidth: SizeConfig.defaultSize! * 4.5,
-                            activeFillColor: kHeader,
+                            activeFillColor: kPrimaryLight,
                             inactiveFillColor: Colors.transparent,
                             selectedFillColor: Colors.transparent,
                             activeColor: kButton,
-                            inactiveColor: context.watch<ThemeCubit>().state ? Colors.white : kMainDark,
+                            inactiveColor: context.watch<ThemeCubit>().state
+                                ? Colors.white
+                                : kPrimaryDark,
                             selectedColor: kButton,
                           ),
                           animationDuration: const Duration(milliseconds: 300),
@@ -367,7 +374,10 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                         height: SizeConfig.defaultSize! * 5.6,
                         child: CustomButton(
                           text: 'auth.verify'.tr(),
-                          onPressed: (!_isDisposed && !_isNavigating && currentText.length == 6 && mounted)
+                          onPressed: (!_isDisposed &&
+                                  !_isNavigating &&
+                                  currentText.length == 6 &&
+                                  mounted)
                               ? _handleVerification
                               : null,
                           fontSize: SizeConfig.defaultSize! * 2,
@@ -390,15 +400,22 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                     SizedBox(width: SizeConfig.defaultSize! * 1.2),
                     Container(
                       decoration: BoxDecoration(
-                        color: context.watch<ThemeCubit>().state ? kMainLight : kMainLight,
-                        borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 3),
+                        color: context.watch<ThemeCubit>().state
+                            ? kSecondaryDark
+                            : kSecondaryDark,
+                        borderRadius:
+                            BorderRadius.circular(SizeConfig.defaultSize! * 3),
                       ),
                       child: InkWell(
-                        onTap: (!_isDisposed && !_isNavigating && _isResendEnabled && mounted)
+                        onTap: (!_isDisposed &&
+                                !_isNavigating &&
+                                _isResendEnabled &&
+                                mounted)
                             ? _handleResend
                             : null,
                         child: Padding(
-                          padding: EdgeInsets.all(SizeConfig.defaultSize! * 1.2),
+                          padding:
+                              EdgeInsets.all(SizeConfig.defaultSize! * 1.2),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -409,7 +426,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                                 style: TextStyle(
                                   color: _isResendEnabled
                                       ? kButton
-                                      : context.watch<ThemeCubit>().state ? Colors.white : kMainDark,
+                                      : context.watch<ThemeCubit>().state
+                                          ? Colors.white
+                                          : kPrimaryDark,
                                   fontSize: SizeConfig.defaultSize! * 1.6,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -419,7 +438,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                                 Text(
                                   '(${_resendTimer.toString()})',
                                   style: TextStyle(
-                                    color: context.watch<ThemeCubit>().state ? Colors.white : kMainDark,
+                                    color: context.watch<ThemeCubit>().state
+                                        ? Colors.white
+                                        : kPrimaryDark,
                                     fontSize: SizeConfig.defaultSize! * 1.6,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -449,11 +470,14 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
       child: Column(
         children: [
           AspectRatio(
-            aspectRatio: 16/9,
+            aspectRatio: 16 / 9,
             child: Container(
               decoration: BoxDecoration(
-                color: context.watch<ThemeCubit>().state ? kDetails : kDetails.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
+                color: context.watch<ThemeCubit>().state
+                    ? kDetails
+                    : kDetails.withValues(alpha: 0.1),
+                borderRadius:
+                    BorderRadius.circular(SizeConfig.defaultSize! * 1.5),
               ),
               padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
               child: SvgPicture.asset(
@@ -501,7 +525,8 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
           textAlign: TextAlign.left,
         ),
         SizedBox(height: SizeConfig.defaultSize! * 2.4),
-        if (mounted && !_isDisposed) _buildVerificationUI(textColor, subTextColor),
+        if (mounted && !_isDisposed)
+          _buildVerificationUI(textColor, subTextColor),
       ],
     );
   }
@@ -522,14 +547,17 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
             animationType: AnimationType.fade,
             pinTheme: PinTheme(
               shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.2),
+              borderRadius:
+                  BorderRadius.circular(SizeConfig.defaultSize! * 1.2),
               fieldHeight: SizeConfig.defaultSize! * 4.5,
               fieldWidth: SizeConfig.defaultSize! * 4.5,
-              activeFillColor: kHeader,
+              activeFillColor: kPrimaryLight,
               inactiveFillColor: Colors.transparent,
               selectedFillColor: Colors.transparent,
               activeColor: kButton,
-              inactiveColor: context.watch<ThemeCubit>().state ? Colors.white : kMainDark,
+              inactiveColor: context.watch<ThemeCubit>().state
+                  ? Colors.white
+                  : kPrimaryDark,
               selectedColor: kButton,
             ),
             animationDuration: const Duration(milliseconds: 300),
@@ -566,7 +594,10 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
           height: SizeConfig.defaultSize! * 5.6,
           child: CustomButton(
             text: 'auth.verify'.tr(),
-            onPressed: (!_isDisposed && !_isNavigating && currentText.length == 6 && mounted)
+            onPressed: (!_isDisposed &&
+                    !_isNavigating &&
+                    currentText.length == 6 &&
+                    mounted)
                 ? _handleVerification
                 : null,
             fontSize: SizeConfig.defaultSize! * 2,
@@ -585,13 +616,19 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
               ),
               SizedBox(height: SizeConfig.defaultSize! * 1.2),
               InkWell(
-                onTap: (!_isDisposed && !_isNavigating && _isResendEnabled && mounted)
+                onTap: (!_isDisposed &&
+                        !_isNavigating &&
+                        _isResendEnabled &&
+                        mounted)
                     ? _handleResend
                     : null,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: context.watch<ThemeCubit>().state ? kMainLight : kMainLight,
-                    borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 3),
+                    color: context.watch<ThemeCubit>().state
+                        ? kSecondaryDark
+                        : kSecondaryDark,
+                    borderRadius:
+                        BorderRadius.circular(SizeConfig.defaultSize! * 3),
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(SizeConfig.defaultSize! * 1.2),
@@ -605,7 +642,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                           style: TextStyle(
                             color: _isResendEnabled
                                 ? kButton
-                                : context.watch<ThemeCubit>().state ? Colors.white : Colors.white,
+                                : context.watch<ThemeCubit>().state
+                                    ? Colors.white
+                                    : Colors.white,
                             fontSize: SizeConfig.defaultSize! * 1.6,
                             fontWeight: FontWeight.bold,
                           ),
@@ -615,7 +654,9 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
                           Text(
                             ':${_resendTimer.toString()}',
                             style: TextStyle(
-                              color: context.watch<ThemeCubit>().state ? Colors.white : Colors.white,
+                              color: context.watch<ThemeCubit>().state
+                                  ? Colors.white
+                                  : Colors.white,
                               fontSize: SizeConfig.defaultSize! * 1.6,
                               fontWeight: FontWeight.bold,
                             ),
@@ -663,8 +704,8 @@ class _OTPVerificationViewState extends State<OTPVerificationView> with WidgetsB
 
     if (mounted) {
       context.read<AuthBloc>().add(
-        PhoneNumberSubmitted(phoneNumber: widget.initialPhoneNumber.trim()),
-      );
+            PhoneNumberSubmitted(phoneNumber: widget.initialPhoneNumber.trim()),
+          );
     }
   }
 }

@@ -6,8 +6,7 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kMainLight, 
-
+      backgroundColor: kSecondaryDark,
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(

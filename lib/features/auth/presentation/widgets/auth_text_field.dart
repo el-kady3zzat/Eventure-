@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as ui;
+
 class AuthTextField extends StatefulWidget {
   final String labelText;
   final String hintText;
@@ -21,7 +22,6 @@ class AuthTextField extends StatefulWidget {
   final TextEditingController? passwordController;
   final Function(String)? onChanged;
   final Widget? suffixIcon;
-
 
   const AuthTextField({
     super.key,
@@ -51,7 +51,8 @@ class AuthTextFieldState extends State<AuthTextField> {
     super.initState();
     _bloc = AuthTextFieldBloc();
 
-    if (widget.fieldType == 'confirmPassword' && widget.passwordController != null) {
+    if (widget.fieldType == 'confirmPassword' &&
+        widget.passwordController != null) {
       widget.passwordController!.addListener(_onPasswordChange);
       widget.controller.addListener(_onConfirmPasswordChange);
     }
@@ -63,7 +64,8 @@ class AuthTextFieldState extends State<AuthTextField> {
 
   @override
   void dispose() {
-    if (widget.fieldType == 'confirmPassword' && widget.passwordController != null) {
+    if (widget.fieldType == 'confirmPassword' &&
+        widget.passwordController != null) {
       widget.passwordController!.removeListener(_onPasswordChange);
       widget.controller.removeListener(_onConfirmPasswordChange);
     }
@@ -114,7 +116,8 @@ class AuthTextFieldState extends State<AuthTextField> {
 
   bool isFieldValid() {
     if (widget.fieldType == 'confirmPassword') {
-      return isValid && widget.controller.text == widget.passwordController?.text;
+      return isValid &&
+          widget.controller.text == widget.passwordController?.text;
     }
     return isValid;
   }
@@ -154,7 +157,8 @@ class AuthTextFieldState extends State<AuthTextField> {
                 color: isMet ? kButton : Colors.white60,
                 fontSize: SizeConfig.size(p: 10, l: 10),
               ),
-              child: Text(requirement), // requirement is already a translation key
+              child:
+                  Text(requirement), // requirement is already a translation key
             ),
           ),
         ],
@@ -182,7 +186,8 @@ class AuthTextFieldState extends State<AuthTextField> {
               previous.passwordRequirements != current.passwordRequirements ||
               (previous.passwordRequirements != null &&
                   current.passwordRequirements != null &&
-                  !mapEquals(previous.passwordRequirements, current.passwordRequirements));
+                  !mapEquals(previous.passwordRequirements,
+                      current.passwordRequirements));
         },
         builder: (context, state) {
           return Column(
@@ -194,8 +199,11 @@ class AuthTextFieldState extends State<AuthTextField> {
                 keyboardType: widget.keyboardType,
                 obscureText: widget.isPassword && state.obscureText,
                 maxLength: widget.fieldType == 'phone' ? 16 : null,
-                textAlign: widget.fieldType == 'phone' ? TextAlign.left : TextAlign.start,
-                textDirection: widget.fieldType == 'phone' ? ui.TextDirection.ltr : null,
+                textAlign: widget.fieldType == 'phone'
+                    ? TextAlign.left
+                    : TextAlign.start,
+                textDirection:
+                    widget.fieldType == 'phone' ? ui.TextDirection.ltr : null,
                 inputFormatters: widget.fieldType == 'phone'
                     ? [FilteringTextInputFormatter.allow(RegExp(r'[0-9+\s]'))]
                     : null,
@@ -211,7 +219,8 @@ class AuthTextFieldState extends State<AuthTextField> {
                     final formattedValue = _formatPhoneNumber(value);
                     widget.controller.value = TextEditingValue(
                       text: formattedValue,
-                      selection: TextSelection.collapsed(offset: formattedValue.length),
+                      selection: TextSelection.collapsed(
+                          offset: formattedValue.length),
                     );
                   }
 
@@ -228,53 +237,62 @@ class AuthTextFieldState extends State<AuthTextField> {
                   if (widget.fieldType == 'phone') {
                     if (widget.controller.text.isEmpty) {
                       widget.controller.text = '+2';
-                      widget.controller.selection = TextSelection.collapsed(offset: 2);
+                      widget.controller.selection =
+                          TextSelection.collapsed(offset: 2);
                     }
                   }
                 },
                 decoration: InputDecoration(
                   alignLabelWithHint: widget.fieldType == 'phone',
-                  hintTextDirection: widget.fieldType == 'phone' ? ui.TextDirection.ltr : null,
+                  hintTextDirection:
+                      widget.fieldType == 'phone' ? ui.TextDirection.ltr : null,
                   labelText: widget.labelText.tr(),
                   labelStyle: TextStyle(
                     color: Colors.white70,
-                    fontSize: SizeConfig.size(p: defaultSize * 1.2, l: defaultSize* 1.5),
+                    fontSize: SizeConfig.size(
+                        p: defaultSize * 1.2, l: defaultSize * 1.5),
                   ),
                   hintText: widget.fieldType == 'phone'
                       ? '+2 XXX XXX XXXX'
                       : widget.hintText.tr(),
                   hintStyle: TextStyle(
                     color: Colors.white60,
-                    fontSize: SizeConfig.size(p: defaultSize * 1.2, l: defaultSize* 1.2),
+                    fontSize: SizeConfig.size(
+                        p: defaultSize * 1.2, l: defaultSize * 1.2),
                   ),
                   errorText: state.showError && state.errorMessage != null
                       ? state.errorMessage!.tr()
                       : null,
                   errorStyle: TextStyle(
                     color: Colors.red.shade400,
-                    fontSize: SizeConfig.size(p: defaultSize * 1.1, l: defaultSize * 1.2),
+                    fontSize: SizeConfig.size(
+                        p: defaultSize * 1.1, l: defaultSize * 1.2),
                   ),
                   prefixIcon: Icon(
                     widget.prefixIcon,
                     color: kPreIcon,
-                    size: SizeConfig.size(p: defaultSize * 2, l: defaultSize * 2.5),
+                    size: SizeConfig.size(
+                        p: defaultSize * 2, l: defaultSize * 2.5),
                   ),
-                  suffixIcon: widget.suffixIcon ?? (widget.isPassword
-                      ? IconButton(
-                    icon: Icon(
-                      state.obscureText
-                          ? Icons.visibility_outlined
-                          : Icons.visibility_off_outlined,
-                      color: kButton,
-                      size: SizeConfig.size(p: defaultSize * 2, l: defaultSize * 2.2),
-                    ),
-                    onPressed: () {
-                      _bloc.add(const TogglePasswordVisibilityEvent());
-                    },
-                  )
-                      : null),
+                  suffixIcon: widget.suffixIcon ??
+                      (widget.isPassword
+                          ? IconButton(
+                              icon: Icon(
+                                state.obscureText
+                                    ? Icons.visibility_outlined
+                                    : Icons.visibility_off_outlined,
+                                color: kButton,
+                                size: SizeConfig.size(
+                                    p: defaultSize * 2, l: defaultSize * 2.2),
+                              ),
+                              onPressed: () {
+                                _bloc
+                                    .add(const TogglePasswordVisibilityEvent());
+                              },
+                            )
+                          : null),
                   filled: false,
-                  fillColor: kMainLight,
+                  fillColor: kSecondaryDark,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(
                       SizeConfig.size(p: defaultSize * 1.2, l: defaultSize),
@@ -315,15 +333,16 @@ class AuthTextFieldState extends State<AuthTextField> {
                     ),
                   ),
                   contentPadding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.size(p: defaultSize * 1.5, l: defaultSize * 1.2),
-                    vertical: SizeConfig.size(p: defaultSize , l: defaultSize),
+                    horizontal: SizeConfig.size(
+                        p: defaultSize * 1.5, l: defaultSize * 1.2),
+                    vertical: SizeConfig.size(p: defaultSize, l: defaultSize),
                   ),
                   counterText: '',
                 ),
-
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: SizeConfig.size(p: defaultSize * 1.5, l: defaultSize * 1.5),
+                  fontSize: SizeConfig.size(
+                      p: defaultSize * 1.5, l: defaultSize * 1.5),
                 ),
               ),
               if (widget.fieldType == 'password' &&
@@ -335,7 +354,8 @@ class AuthTextFieldState extends State<AuthTextField> {
                   curve: Curves.easeInOut,
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: SizeConfig.size(p: defaultSize, l: defaultSize * 0.8),
+                      top:
+                          SizeConfig.size(p: defaultSize, l: defaultSize * 0.8),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

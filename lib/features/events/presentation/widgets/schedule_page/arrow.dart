@@ -16,7 +16,7 @@ class Arrow extends StatelessWidget {
       width: SizeConfig.size(p: 50.h, l: 85.h),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        color: kHeader,
+        color: kPrimaryLight,
         child: IconButton(
           icon: Icon(
             icon,

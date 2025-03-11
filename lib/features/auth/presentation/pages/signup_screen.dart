@@ -19,6 +19,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'dart:ui' as ui;
+
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
 
@@ -37,6 +38,7 @@ class SignUpView extends StatefulWidget {
   @override
   State<SignUpView> createState() => _SignUpViewState();
 }
+
 class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
@@ -69,12 +71,13 @@ class _SignUpViewState extends State<SignUpView> {
 
     return BlocBuilder<ThemeCubit, bool>(
       builder: (context, isDarkMode) {
-        final backgroundColor = isDarkMode ? kMainDark : Colors.white;
+        final backgroundColor = isDarkMode ? kPrimaryDark : Colors.white;
         final backgroundButton = isDarkMode ? kScaffoldLight : kDetails;
-        final textColor = isDarkMode ? Colors.white : kMainLight;
-        final subTextColor = isDarkMode ? Colors.white : kMainLight.withValues(alpha: 0.7);
+        final textColor = isDarkMode ? Colors.white : kSecondaryDark;
+        final subTextColor =
+            isDarkMode ? Colors.white : kSecondaryDark.withValues(alpha: 0.7);
         final accentColor = isDarkMode ? kButton : kButton;
-        final dividerColor = isDarkMode ? kPreIcon : kMainDark;
+        final dividerColor = isDarkMode ? kPreIcon : kPrimaryDark;
 
         return BlocConsumer<AuthBloc, AuthState>(
           listener: (context, state) {
@@ -96,7 +99,8 @@ class _SignUpViewState extends State<SignUpView> {
                 );
               } else {
                 authBloc.add(
-                  PhoneNumberSubmitted(phoneNumber: _phoneController.text.trim()),
+                  PhoneNumberSubmitted(
+                      phoneNumber: _phoneController.text.trim()),
                 );
               }
             } else if (state is ValidationError) {
@@ -106,7 +110,7 @@ class _SignUpViewState extends State<SignUpView> {
               setState(() => _isNavigating = true);
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => HomePage()),
-                    (route) => false,
+                (route) => false,
               );
             } else if (state is PhoneNumberVerificationSent) {
               UI.successSnack(context, state.message.tr());
@@ -149,16 +153,18 @@ class _SignUpViewState extends State<SignUpView> {
               setState(() => _isNavigating = true);
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => HomePage()),
-                    (route) => false,
+                (route) => false,
               );
-            } else if (state is AuthError || state is GoogleSignInError || state is OTPVerificationError) {
+            } else if (state is AuthError ||
+                state is GoogleSignInError ||
+                state is OTPVerificationError) {
               UI.errorSnack(
                 context,
                 (state is AuthError
-                    ? state.message
-                    : state is GoogleSignInError
-                    ? state.message
-                    : (state as OTPVerificationError).message)
+                        ? state.message
+                        : state is GoogleSignInError
+                            ? state.message
+                            : (state as OTPVerificationError).message)
                     .tr(),
               );
             }
@@ -171,20 +177,32 @@ class _SignUpViewState extends State<SignUpView> {
                   SafeArea(
                     child: SingleChildScrollView(
                       padding: EdgeInsets.symmetric(
-                        horizontal: SizeConfig.defaultSize ?? 16, // Fallback if null
+                        horizontal:
+                            SizeConfig.defaultSize ?? 16, // Fallback if null
                         vertical: SizeConfig.defaultSize ?? 2,
                       ),
                       child: Form(
                         key: _formKey,
                         child: SizeConfig.isPortrait()
                             ? _buildPortraitLayout(
-                            state, textColor, accentColor, subTextColor, dividerColor, backgroundButton)
+                                state,
+                                textColor,
+                                accentColor,
+                                subTextColor,
+                                dividerColor,
+                                backgroundButton)
                             : _buildLandscapeLayout(
-                            state, textColor, accentColor, dividerColor, backgroundButton, subTextColor),
+                                state,
+                                textColor,
+                                accentColor,
+                                dividerColor,
+                                backgroundButton,
+                                subTextColor),
                       ),
                     ),
                   ),
-                  if (state is AuthLoading) LoadingOverlay(message: state.message.tr()),
+                  if (state is AuthLoading)
+                    LoadingOverlay(message: state.message.tr()),
                 ],
               ),
             );
@@ -193,7 +211,14 @@ class _SignUpViewState extends State<SignUpView> {
       },
     );
   }
-  Widget _buildPortraitLayout(AuthState state, Color textColor, Color accentColor, Color subTextColor, Color dividerColor, Color backgroundButton) {
+
+  Widget _buildPortraitLayout(
+      AuthState state,
+      Color textColor,
+      Color accentColor,
+      Color subTextColor,
+      Color dividerColor,
+      Color backgroundButton) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -208,7 +233,8 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 1.5),
+          padding:
+              EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 1.5),
           child: Text(
             'auth.sign_up'.tr(),
             style: TextStyle(
@@ -219,7 +245,8 @@ class _SignUpViewState extends State<SignUpView> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 1.5),
+          padding:
+              EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 1.5),
           child: Text(
             'auth.sign_up_subtitle'.tr(),
             style: TextStyle(
@@ -240,7 +267,13 @@ class _SignUpViewState extends State<SignUpView> {
     );
   }
 
-  Widget _buildLandscapeLayout(AuthState state, Color textColor, Color accentColor, Color dividerColor, Color backgroundButton, Color subTextColor) {
+  Widget _buildLandscapeLayout(
+      AuthState state,
+      Color textColor,
+      Color accentColor,
+      Color dividerColor,
+      Color backgroundButton,
+      Color subTextColor) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -296,10 +329,10 @@ class _SignUpViewState extends State<SignUpView> {
                 'auth.sign_up_subtitle'.tr(),
                 style: TextStyle(
                   color: subTextColor,
-                  fontSize: SizeConfig.defaultSize!*1.5 ,
+                  fontSize: SizeConfig.defaultSize! * 1.5,
                 ),
               ),
-           //   SizedBox(height: SizeConfig.defaultSize!),
+              //   SizedBox(height: SizeConfig.defaultSize!),
               Transform.scale(
                 scale: 0.85,
                 child: _buildSignUpForm(textColor, accentColor),
@@ -312,16 +345,20 @@ class _SignUpViewState extends State<SignUpView> {
       ],
     );
   }
+
   Widget _buildSignUpForm(Color textColor, Color accentColor) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
         Container(
-          margin: EdgeInsets.symmetric(horizontal: SizeConfig.defaultSize! * 2),  // Reduced margin
-          padding: EdgeInsets.all(SizeConfig.defaultSize! * 1.2),  // Reduced padding
+          margin: EdgeInsets.symmetric(
+              horizontal: SizeConfig.defaultSize! * 2), // Reduced margin
+          padding:
+              EdgeInsets.all(SizeConfig.defaultSize! * 1.2), // Reduced padding
           decoration: BoxDecoration(
             color: kDetails,
-            borderRadius: BorderRadius.circular(SizeConfig.defaultSize! * 1.2),  // Reduced radius
+            borderRadius: BorderRadius.circular(
+                SizeConfig.defaultSize! * 1.2), // Reduced radius
           ),
           child: Column(
             children: [
@@ -332,7 +369,8 @@ class _SignUpViewState extends State<SignUpView> {
                 labelText: 'auth.full_name'.tr(),
                 prefixIcon: Icons.person_3_rounded,
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 0.8),  // Reduced spacing
+              SizedBox(
+                  height: SizeConfig.defaultSize! * 0.8), // Reduced spacing
               AuthTextField(
                 controller: _emailController,
                 hintText: 'auth.email'.tr(),
@@ -341,7 +379,8 @@ class _SignUpViewState extends State<SignUpView> {
                 labelText: 'auth.email'.tr(),
                 prefixIcon: Icons.email_outlined,
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 0.8),  // Reduced spacing
+              SizedBox(
+                  height: SizeConfig.defaultSize! * 0.8), // Reduced spacing
               AuthTextField(
                 controller: _passwordController,
                 hintText: 'auth.password'.tr(),
@@ -350,7 +389,8 @@ class _SignUpViewState extends State<SignUpView> {
                 labelText: 'auth.password'.tr(),
                 prefixIcon: Icons.lock_outline,
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 0.8),  // Reduced spacing
+              SizedBox(
+                  height: SizeConfig.defaultSize! * 0.8), // Reduced spacing
               AuthTextField(
                 controller: _confirmPasswordController,
                 hintText: 'auth.confirm_password'.tr(),
@@ -360,7 +400,8 @@ class _SignUpViewState extends State<SignUpView> {
                 labelText: 'auth.confirm_password'.tr(),
                 prefixIcon: Icons.lock_outline,
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 0.8),  // Reduced spacing
+              SizedBox(
+                  height: SizeConfig.defaultSize! * 0.8), // Reduced spacing
               Directionality(
                 textDirection: ui.TextDirection.ltr,
                 child: AuthTextField(
@@ -381,22 +422,24 @@ class _SignUpViewState extends State<SignUpView> {
                   },
                 ),
               ),
-              SizedBox(height: SizeConfig.defaultSize! * 3),  // Reduced bottom spacing
+              SizedBox(
+                  height:
+                      SizeConfig.defaultSize! * 3), // Reduced bottom spacing
             ],
           ),
         ),
         Positioned(
-          bottom: -SizeConfig.defaultSize! * 1.5,  // Reduced bottom position
+          bottom: -SizeConfig.defaultSize! * 1.5, // Reduced bottom position
           left: 0,
           right: 0,
           child: Center(
             child: SizedBox(
-              width: SizeConfig.size(p: 180, l: 180),  // Reduced button width
-              height: SizeConfig.defaultSize! * 5,    // Reduced button height
+              width: SizeConfig.size(p: 180, l: 180), // Reduced button width
+              height: SizeConfig.defaultSize! * 5, // Reduced button height
               child: CustomButton(
                 text: 'auth.sign_up'.tr(),
                 onPressed: _handleSignUp,
-                fontSize: SizeConfig.defaultSize! * 1.3,  // Reduced font size
+                fontSize: SizeConfig.defaultSize! * 1.3, // Reduced font size
               ),
             ),
           ),
@@ -443,14 +486,14 @@ class _SignUpViewState extends State<SignUpView> {
           children: [
             FaIcon(
               FontAwesomeIcons.google,
-              color: kMainDark,
+              color: kPrimaryDark,
               size: SizeConfig.defaultSize! * 1.7,
             ),
             SizedBox(width: SizeConfig.defaultSize!),
             Text(
               'auth.continue_with_google'.tr(),
               style: TextStyle(
-                color: kMainDark,
+                color: kPrimaryDark,
                 fontSize: SizeConfig.defaultSize! * 1.6,
                 fontWeight: FontWeight.w500,
               ),
@@ -460,7 +503,9 @@ class _SignUpViewState extends State<SignUpView> {
       ),
     );
   }
-  Widget _buildLoginRow(Color textColor, Color accentColor, Color backgroundButton) {
+
+  Widget _buildLoginRow(
+      Color textColor, Color accentColor, Color backgroundButton) {
     return Transform.scale(
       scale: 1,
       child: Center(
@@ -524,14 +569,14 @@ class _SignUpViewState extends State<SignUpView> {
     }
 
     context.read<AuthBloc>().add(
-      CheckUserDataAvailability(
-        name: _nameController.text.trim(),
-        email: _emailController.text.trim(),
-        password: _passwordController.text,
-        confirmPassword: _confirmPasswordController.text,
-        phone: _phoneController.text.trim(),
-      ),
-    );
+          CheckUserDataAvailability(
+            name: _nameController.text.trim(),
+            email: _emailController.text.trim(),
+            password: _passwordController.text,
+            confirmPassword: _confirmPasswordController.text,
+            phone: _phoneController.text.trim(),
+          ),
+        );
   }
 
   Future<void> _handleGoogleSignIn() async {

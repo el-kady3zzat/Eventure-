@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LogoutButton extends StatelessWidget {
+  const LogoutButton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,11 +35,11 @@ class LogoutButton extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => LoginScreen()),
-              (route) => false, 
+              (route) => false,
             );
           },
           child: Row(
-            mainAxisSize: MainAxisSize.min, 
+            mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
                 Icons.power_settings_new,
@@ -59,7 +61,7 @@ class LogoutButton extends StatelessWidget {
                         : 17.sp,
                     color: kDetails,
                   ),
-                  overflow: TextOverflow.ellipsis, 
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

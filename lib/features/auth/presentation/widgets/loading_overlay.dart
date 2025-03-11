@@ -32,7 +32,7 @@ class LoadingOverlay extends StatelessWidget {
                 Text(
                   message,
                   style: TextStyle(
-                    color: isDarkMode ? Colors.white : kMainLight,
+                    color: isDarkMode ? Colors.white : kSecondaryDark,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),

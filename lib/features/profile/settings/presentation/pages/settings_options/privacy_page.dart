@@ -7,9 +7,9 @@ class PrivacyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-    final textColor = isDarkMode ? kWhite : kMainDark;
-    final detailsColor = isDarkMode ? kLightGrey : kMainDark;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
+    final detailsColor = isDarkMode ? kLightGrey : kPrimaryDark;
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
@@ -27,7 +27,9 @@ class PrivacyPage extends StatelessWidget {
                         Icons.arrow_back_ios,
                         color: textColor,
                         size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 15.w: 21.w,
+                                Orientation.landscape
+                            ? 15.w
+                            : 21.w,
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -36,8 +38,10 @@ class PrivacyPage extends StatelessWidget {
                     Spacer(),
                     Text('privacy.title'.tr(),
                         style: TextStyle(
-                            fontSize:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 12.sp: 17.sp,
+                            fontSize: MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? 12.sp
+                                : 17.sp,
                             fontWeight: FontWeight.bold,
                             color: textColor)),
                     Spacer(),
@@ -45,12 +49,14 @@ class PrivacyPage extends StatelessWidget {
                 ),
                 SizedBox(height: 25.h),
                 Text(
-                 'privacy.content'.tr(),
+                  'privacy.content'.tr(),
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: detailsColor,
                     fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 12.sp: 14.sp,
+                            Orientation.landscape
+                        ? 12.sp
+                        : 14.sp,
                   ),
                 ),
                 SizedBox(height: 20),
@@ -61,6 +67,4 @@ class PrivacyPage extends StatelessWidget {
       ),
     );
   }
-
- 
 }

@@ -2,7 +2,6 @@ import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class AuthenticationLoadingDialog extends StatelessWidget {
   const AuthenticationLoadingDialog({super.key});
 
@@ -16,7 +15,7 @@ class AuthenticationLoadingDialog extends StatelessWidget {
       child: Container(
         padding: REdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isDarkMode ? kMainDark : kMainLight,
+          color: isDarkMode ? kPrimaryDark : kSecondaryDark,
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
@@ -31,7 +30,7 @@ class AuthenticationLoadingDialog extends StatelessWidget {
           children: [
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
-                isDarkMode ? kMainLight : kMainDark,
+                isDarkMode ? kSecondaryDark : kPrimaryDark,
               ),
             ),
             SizedBox(height: 16.h),
@@ -39,7 +38,7 @@ class AuthenticationLoadingDialog extends StatelessWidget {
               'Authenticating...',
               style: TextStyle(
                 fontSize: 16.sp,
-                color: isDarkMode ? kMainLight : kMainDark,
+                color: isDarkMode ? kSecondaryDark : kPrimaryDark,
               ),
             ),
           ],

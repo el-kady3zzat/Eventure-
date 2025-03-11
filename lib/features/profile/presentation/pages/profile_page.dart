@@ -14,11 +14,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class ProfilePageState extends State<ProfilePage> {
   FSUser? userData;
   bool show = false;
   @override
@@ -31,8 +33,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-    final textColor = isDarkMode ? kWhite : kMainDark;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
 
     return SafeArea(
       child: Scaffold(
@@ -48,9 +50,10 @@ class _ProfilePageState extends State<ProfilePage> {
                   IconButton(
                     icon: Icon(
                       Icons.arrow_back_ios,
-                      size:  MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 17.w:21.w,
+                      size: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? 17.w
+                          : 21.w,
                       color: textColor,
                     ),
                     onPressed: () {
@@ -62,8 +65,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     style: TextStyle(
                       color: textColor,
                       fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?12.sp: 17.sp,
+                              Orientation.landscape
+                          ? 12.sp
+                          : 17.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -72,8 +76,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.edit_outlined,
                       color: textColor,
                       size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?18.sp: 25.w,
+                              Orientation.landscape
+                          ? 18.sp
+                          : 25.w,
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -103,17 +108,19 @@ class _ProfilePageState extends State<ProfilePage> {
 
                       return CircleAvatar(
                           radius: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 100.r: 75.r,
+                                  Orientation.landscape
+                              ? 100.r
+                              : 75.r,
                           backgroundImage: user!.image.isNotEmpty
                               ? MemoryImage(base64Decode(user.image))
                               : assetProfileImage());
                     }
                     if (state is ProfileImageRemoved) {
                       return CircleAvatar(
-                        radius:  MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 100.r:75.r,
+                        radius: MediaQuery.of(context).orientation ==
+                                Orientation.landscape
+                            ? 100.r
+                            : 75.r,
                         backgroundImage: assetProfileImage(),
                       );
                     }
@@ -122,9 +129,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     }
 
                     return CircleAvatar(
-                        radius:  MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 100.r:75.r, backgroundImage: assetProfileImage());
+                        radius: MediaQuery.of(context).orientation ==
+                                Orientation.landscape
+                            ? 100.r
+                            : 75.r,
+                        backgroundImage: assetProfileImage());
                   }),
               SizedBox(height: 12.h),
               BlocBuilder<ProfileBloc, ProfileState>(
@@ -143,8 +152,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             style: TextStyle(
                                 color: textColor,
                                 fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? 16.sp: 22.sp,
+                                        Orientation.landscape
+                                    ? 16.sp
+                                    : 22.sp,
                                 fontWeight: FontWeight.bold))
                         : Center(
                             child: Text('messages.user_data_not_found'.tr(),
@@ -175,7 +185,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: TextButton(
                                 style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all(
-                                      showEvents ? kHeader : kDetails),
+                                      showEvents ? kPrimaryLight : kDetails),
                                 ),
                                 onPressed: () {
                                   context
@@ -194,7 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: TextButton(
                                 style: ButtonStyle(
                                   backgroundColor: WidgetStateProperty.all(
-                                      !showEvents ? kHeader : kDetails),
+                                      !showEvents ? kPrimaryLight : kDetails),
                                 ),
                                 onPressed: () {
                                   context
@@ -233,9 +243,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 },
                 builder: (context, state) {
-               
-             
-
                   if (state is ShowEventsUpdated) {
                     debugPrint("show: ${state.showEvents}");
                   }
@@ -282,56 +289,52 @@ class _ProfilePageState extends State<ProfilePage> {
                       !context.read<ProfileBloc>().showEvents) {
                     final user = state.user;
                     debugPrint("Profile Data: ${user!.name}");
-                    return 
-                    Expanded(
-                      child:
-                      MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?ListView(
-                        
-                        
-                        children: [
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.name,
-                              icon: Icons.person_2_outlined),
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.email,
-                              icon: Icons.email_outlined),
-                          ProfileItem(
-                              txt: '888888888',
-                              isObscure: false,
-                              icon: Icons.lock_open_outlined),
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.phone.isEmpty ? 'N/A' : user.phone,
-                              icon: Icons.phone_android_outlined),
-                        ],
-                      )
-                      
-                      :
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.name,
-                              icon: Icons.person_2_outlined),
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.email,
-                              icon: Icons.email_outlined),
-                          ProfileItem(
-                              txt: '888888888',
-                              isObscure: false,
-                              icon: Icons.lock_open_outlined),
-                          ProfileItem(
-                              isObscure: true,
-                              txt: user.phone.isEmpty ? 'N/A' : user.phone,
-                              icon: Icons.phone_android_outlined),
-                        ],
-                      ),
+                    return Expanded(
+                      child: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? ListView(
+                              children: [
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt: user.name,
+                                    icon: Icons.person_2_outlined),
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt: user.email,
+                                    icon: Icons.email_outlined),
+                                ProfileItem(
+                                    txt: '888888888',
+                                    isObscure: false,
+                                    icon: Icons.lock_open_outlined),
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt:
+                                        user.phone.isEmpty ? 'N/A' : user.phone,
+                                    icon: Icons.phone_android_outlined),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt: user.name,
+                                    icon: Icons.person_2_outlined),
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt: user.email,
+                                    icon: Icons.email_outlined),
+                                ProfileItem(
+                                    txt: '888888888',
+                                    isObscure: false,
+                                    icon: Icons.lock_open_outlined),
+                                ProfileItem(
+                                    isObscure: true,
+                                    txt:
+                                        user.phone.isEmpty ? 'N/A' : user.phone,
+                                    icon: Icons.phone_android_outlined),
+                              ],
+                            ),
                     );
                   }
 

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
@@ -21,6 +22,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
     double mainHeight = SizeConfig.size(p: 140.h, l: 110.h);
     double mainRadius = 20;
 
@@ -33,6 +35,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           }
         },
         builder: (context, state) {
+          UI.context = context;
           SizeConfig.mContext = context;
           bool isLoading = false;
           Map<String, dynamic> data = {};
@@ -46,7 +49,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             enabled: isLoading,
             child: Card(
               elevation: 10,
-              shadowColor: kHeader,
+              shadowColor: kPrimaryLight,
               margin: REdgeInsets.all(0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
@@ -55,7 +58,6 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               child: AppBar(
-                backgroundColor: kMainDark,
                 toolbarHeight: mainHeight,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
@@ -79,7 +81,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                               children: [
                                 Icon(
                                   Icons.place_outlined,
-                                  color: kHeader,
+                                  color:
+                                      UI.isDarkMode() ? kPrimaryLight : kWhite,
                                   size: SizeConfig.size(p: 25.h, l: 45.h),
                                 ),
                                 Text(
@@ -88,7 +91,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       ? ' Egypt'
                                       : data['location'],
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: kWhite,
                                     fontSize:
                                         SizeConfig.size(p: 14.sp, l: 6.sp),
                                   ),
@@ -98,10 +101,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                             if (!SizeConfig.isPortrait())
                               Center(
                                 child: Text(
-                                  'Hello, ${data['name'] == null || data['name'] == '' ? 'User' : data['name']}',
+                                  '${'events.hello'.tr()}, ${data['name'] == null || data['name'] == '' ? 'User' : data['name']}',
                                   style: TextStyle(
-                                    fontSize: 10.sp,
-                                    color: Colors.white,
+                                    fontSize: 9.sp,
+                                    color: kWhite,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -117,38 +120,53 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       child: Text(
                                         '3',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: UI.isDarkMode()
+                                              ? kPrimaryDark
+                                              : kPrimaryLight,
                                           fontWeight: FontWeight.bold,
                                           fontSize: SizeConfig.size(
-                                              p: 10.sp, l: 4.sp),
+                                            p: 10.sp,
+                                            l: 4.sp,
+                                          ),
                                         ),
                                       ),
                                     ),
                                     position: badges.BadgePosition.topStart(
-                                      start: SizeConfig.size(p: 16.h, l: 28.h),
+                                      start: SizeConfig.size(p: 14.h, l: 28.h),
                                     ),
                                     badgeStyle: badges.BadgeStyle(
-                                      badgeColor: kHeader,
+                                      badgeColor: UI.isDarkMode()
+                                          ? kPrimaryLight
+                                          : kWhite,
                                       borderSide: BorderSide(
-                                          width: 2.h, color: kMainDark),
+                                        width: 2.h,
+                                        color: UI.isDarkMode()
+                                            ? kPrimaryDark
+                                            : kPrimaryLight,
+                                      ),
                                     ),
                                     child: Icon(
                                       Icons.notifications_none_outlined,
-                                      color: Colors.white,
-                                      size: SizeConfig.size(p: 30.h, l: 50.h),
+                                      color: kWhite,
+                                      size: SizeConfig.size(p: 25.h, l: 50.h),
                                     ),
                                   ),
                                 ),
                                 SizedBox(width: 20),
-                                SizedBox(
-                                  height: SizeConfig.size(p: 45.h, l: 85.h),
-                                  width: SizeConfig.size(p: 45.h, l: 85.h),
-                                  child: CircleAvatar(
-                                    foregroundImage: data['image'] == null ||
-                                            data['image'] == ''
-                                        ? AssetImage('assets/images/logo.webp')
-                                        : CachedNetworkImageProvider(
-                                            data['image']),
+                                InkWell(
+                                  onTap: () => Navigator.of(context)
+                                      .pushNamed('/profile'),
+                                  child: SizedBox(
+                                    height: SizeConfig.size(p: 45.h, l: 85.h),
+                                    width: SizeConfig.size(p: 45.h, l: 85.h),
+                                    child: CircleAvatar(
+                                      foregroundImage: data['image'] == null ||
+                                              data['image'] == ''
+                                          ? AssetImage(
+                                              'assets/images/logo.webp')
+                                          : CachedNetworkImageProvider(
+                                              data['image']),
+                                    ),
                                   ),
                                 )
                               ],
@@ -159,10 +177,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       if (SizeConfig.isPortrait())
                         SizedBox(
                           child: Text(
-                            'Hello,\n ${data.isEmpty ? 'User' : data['name']}',
+                            '${'events.hello'.tr()},\n${data.isEmpty ? 'User' : data['name']}',
                             style: TextStyle(
-                              fontSize: 22.sp,
-                              color: Colors.white,
+                              fontSize: 20.sp,
+                              color: kWhite,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

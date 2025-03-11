@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/constants/dummy_data.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
@@ -20,12 +21,12 @@ class FavoritePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kMainLight,
+        backgroundColor: kSecondaryDark,
         body: SizedBox(
           height: 1.sh,
           child: Column(
             children: [
-              PagesHeader(title: 'FAVORITES'),
+              PagesHeader(title: 'events.favorites'.tr()),
               Expanded(
                 child: BlocProvider(
                   create: (context) =>
@@ -65,7 +66,7 @@ class FavoritePage extends StatelessWidget {
                               )
                             : Center(
                                 child: Text(
-                                  'Your Favorite List is Empty',
+                                  'events.fav_list_empty'.tr(),
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize:
@@ -77,7 +78,7 @@ class FavoritePage extends StatelessWidget {
                       } else if (state is FavoriteEventsError) {
                         return Center(
                           child: Text(
-                            'Error with state: $state',
+                            '${'events.error_with_state'.tr()} $state',
                             style: const TextStyle(color: Colors.red),
                           ),
                         );

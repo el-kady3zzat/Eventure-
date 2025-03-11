@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/notifications/notifications_bloc.dart';
@@ -15,14 +16,14 @@ class NotificationsPage extends StatelessWidget {
     SizeConfig.mContext = context;
 
     return Scaffold(
-      backgroundColor: kMainLight,
+      backgroundColor: kSecondaryDark,
       body: BlocProvider(
         create: (context) =>
             getIt<NotificationsBloc>()..add(FetchNotifications()),
         child: SafeArea(
           child: Column(
             children: [
-              PagesHeader(title: 'NOTIFICATIONS', hasBackBtn: true),
+              PagesHeader(title: 'events.notifications'.tr(), hasBackBtn: true),
               Expanded(
                 child: BlocBuilder<NotificationsBloc, NotificationsState>(
                   builder: (context, state) {
@@ -43,7 +44,7 @@ class NotificationsPage extends StatelessWidget {
                     } else if (state is NotificationError) {
                       return Center(
                           child: Text(
-                        'Error: ${state.message}',
+                        '${'events.error'.tr()}: ${state.message}',
                         style: TextStyle(color: kWhite),
                       ));
                     }

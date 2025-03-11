@@ -20,7 +20,7 @@ class DetailsPage extends StatelessWidget {
     Event event = ModalRoute.of(context)!.settings.arguments as Event;
 
     return Scaffold(
-      backgroundColor: kMainLight.withValues(alpha: 0.1),
+      backgroundColor: kSecondaryDark.withValues(alpha: 0.1),
       body: SizedBox(
         height: 1.sh,
         child: SizeConfig.isPortrait()

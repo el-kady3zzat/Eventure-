@@ -20,14 +20,18 @@ class SavedEventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
 
     return Container(
-      margin: EdgeInsets.only(top: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?15.h: 10.h, left: 15.w, right: 15.w, bottom: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?70.h: 38.h),
+      margin: EdgeInsets.only(
+          top: MediaQuery.of(context).orientation == Orientation.landscape
+              ? 15.h
+              : 10.h,
+          left: 15.w,
+          right: 15.w,
+          bottom: MediaQuery.of(context).orientation == Orientation.landscape
+              ? 70.h
+              : 38.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(25.r)),
         color: backgroundColor,
@@ -51,9 +55,10 @@ class SavedEventCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25.r),
                     child: Image.memory(
                       base64Decode(asset),
-                      height:  MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?100.h: 180.h,
+                      height: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? 100.h
+                          : 180.h,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -67,10 +72,11 @@ class SavedEventCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20.r),
                       ),
                       padding: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ? EdgeInsets.all(8).w :EdgeInsets.all(15).w,
+                              Orientation.landscape
+                          ? EdgeInsets.all(8).w
+                          : EdgeInsets.all(15).w,
                       child: Icon(Icons.edit_outlined,
-                          size: 18.w, color: kMainLight),
+                          size: 18.w, color: kSecondaryDark),
                     ),
                   ),
                 ],
@@ -83,10 +89,10 @@ class SavedEventCard extends StatelessWidget {
             right: 10.w,
             child: Container(
               margin: EdgeInsets.only(left: 5.w, right: 5.w),
-              padding:  EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.r),
-                color: kMainLight,
+                color: kSecondaryDark,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,35 +104,51 @@ class SavedEventCard extends StatelessWidget {
                         title,
                         style: TextStyle(
                           color: kWhite,
-                          fontSize:  MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?13.sp:17.sp,
+                          fontSize: MediaQuery.of(context).orientation ==
+                                  Orientation.landscape
+                              ? 13.sp
+                              : 17.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?4.h: 8.h),
+                      SizedBox(
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.landscape
+                              ? 4.h
+                              : 8.h),
                       Row(
                         children: [
                           Icon(Icons.calendar_today,
-                              color: kWhite, size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?8.w: 12.w),
+                              color: kWhite,
+                              size: MediaQuery.of(context).orientation ==
+                                      Orientation.landscape
+                                  ? 8.w
+                                  : 12.w),
                           SizedBox(width: 5.w),
                           Text(date,
-                              style: TextStyle(color: kWhite, fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?8.sp:10.sp)),
+                              style: TextStyle(
+                                  color: kWhite,
+                                  fontSize:
+                                      MediaQuery.of(context).orientation ==
+                                              Orientation.landscape
+                                          ? 8.sp
+                                          : 10.sp)),
                           SizedBox(width: 10.w),
-                          Icon(Icons.access_time, color: kWhite, size:MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?8.w: 14.w),
+                          Icon(Icons.access_time,
+                              color: kWhite,
+                              size: MediaQuery.of(context).orientation ==
+                                      Orientation.landscape
+                                  ? 8.w
+                                  : 14.w),
                           SizedBox(width: 5.w),
                           Text(time,
-                              style: TextStyle(color: kWhite, fontSize:MediaQuery.of(context).orientation ==
-                          Orientation.landscape
-                      ?8.sp: 10.sp)),
+                              style: TextStyle(
+                                  color: kWhite,
+                                  fontSize:
+                                      MediaQuery.of(context).orientation ==
+                                              Orientation.landscape
+                                          ? 8.sp
+                                          : 10.sp)),
                         ],
                       ),
                     ],
@@ -144,7 +166,8 @@ class SavedEventCard extends StatelessWidget {
                     onPressed: () {},
                     child: Text("Chat",
                         style: TextStyle(
-                            color: kMainLight, fontWeight: FontWeight.bold)),
+                            color: kSecondaryDark,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ],
               ),

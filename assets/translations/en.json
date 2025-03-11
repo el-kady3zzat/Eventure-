@@ -10,7 +10,6 @@
   "admin": {
     "dashboard_title": "Admin Dashboard"
   },
-
   "settings": {
     "title": "Settings",
     "logout": "Logout",
@@ -21,7 +20,6 @@
     "language_changed": "Language changed successfully",
     "theme_changed": "Theme changed successfully"
   },
-
   "auth": {
     "login": "Login",
     "login_subtitle": "Please fill the details to continue.",
@@ -99,7 +97,6 @@
         "not_match": "Passwords do not match"
       }
     },
-
     "messages": {
       "checking_availability": "Checking availability...",
       "email_registered": "This email is already registered",
@@ -155,9 +152,8 @@
     "privacy_policy": "Privacy Policy",
     "about_us": "About US",
     "logout": "LOGOUT"
-
   },
-  "changepass_screen":{
+  "changepass_screen": {
     "change_password": "Change Password",
     "current_password": "Current Password",
     "enter_current_password": "Enter Current Password",
@@ -169,43 +165,59 @@
     "is_required": "is required",
     "password_updated_success": "Password updated successfully!"
   },
-  
-    "privacy": {
-      
-        "title": "PRIVACY POLICY",
-        "content": "Welcome to Eventure, your go-to app for discovering and managing events effortlessly. Your privacy is important to us, and this policy explains how we collect, use, and safeguard your data.\n\n1. Information We Collect\n- Personal details (name, email, phone number) when you sign up.\n- Events you save, book, or mark as favorites.\n- Calendar-based event preferences and interactions.\n- Profile information, including edited data and uploaded images.\n- Device and usage data to enhance your experience.\n\n2. How We Use Your Information\n- To personalize your event recommendations.\n- To enable event booking, saving, and calendar-based filtering.\n- To send notifications about new and upcoming events.\n- To improve app functionality based on user engagement.\n\n3. Sharing Your Information\n- We do not sell your personal data to third parties.\n- We may share anonymized data with trusted partners to enhance our services.\n\n4. Security Measures\n- We implement encryption and secure storage to protect your data.\n- Only authorized personnel have access to sensitive information.\n\nBy using Eventure, you agree to this Privacy Policy. If you have any concerns or questions, please contact our support team."
-      
-    }, 
-    "about": {
-        
-          "title": "ABOUT US",
-          "content": "Eventure is your ultimate event discovery and management app. Whether you're looking for exciting events, saving your favorites, or booking your next experience, Eventure makes it easy. With calendar-based event filtering, real-time notifications, and a personalized profile, we ensure you never miss out on what matters most to you. Seamlessly browse, save, and enjoy events with Eventure – your gateway to unforgettable experiences.",
-          "name": "Eventure"
-    },
-     "profile": {
-            "title": "PROFILE",
-            "edit": "Edit PROFILE",
-              "saved_events": "Saved Events",
-              "my_data": "My Data",  
-              "full_name": "Your Name",
-              "email": "Your Email",         
-              "phone": "Your Phone Number",
-              "camera": "Camera",
-              "gallery": "Gallery",
-              "remove": "Remove"
-    },
-    "messages": {
+  "privacy": {
+    "title": "PRIVACY POLICY",
+    "content": "Welcome to Eventure, your go-to app for discovering and managing events effortlessly. Your privacy is important to us, and this policy explains how we collect, use, and safeguard your data.\n\n1. Information We Collect\n- Personal details (name, email, phone number) when you sign up.\n- Events you save, book, or mark as favorites.\n- Calendar-based event preferences and interactions.\n- Profile information, including edited data and uploaded images.\n- Device and usage data to enhance your experience.\n\n2. How We Use Your Information\n- To personalize your event recommendations.\n- To enable event booking, saving, and calendar-based filtering.\n- To send notifications about new and upcoming events.\n- To improve app functionality based on user engagement.\n\n3. Sharing Your Information\n- We do not sell your personal data to third parties.\n- We may share anonymized data with trusted partners to enhance our services.\n\n4. Security Measures\n- We implement encryption and secure storage to protect your data.\n- Only authorized personnel have access to sensitive information.\n\nBy using Eventure, you agree to this Privacy Policy. If you have any concerns or questions, please contact our support team."
+  },
+  "about": {
+    "title": "ABOUT US",
+    "content": "Eventure is your ultimate event discovery and management app. Whether you're looking for exciting events, saving your favorites, or booking your next experience, Eventure makes it easy. With calendar-based event filtering, real-time notifications, and a personalized profile, we ensure you never miss out on what matters most to you. Seamlessly browse, save, and enjoy events with Eventure – your gateway to unforgettable experiences.",
+    "name": "Eventure"
+  },
+  "profile": {
+    "title": "PROFILE",
+    "edit": "Edit PROFILE",
+    "saved_events": "Saved Events",
+    "my_data": "My Data",
+    "full_name": "Your Name",
+    "email": "Your Email",
+    "phone": "Your Phone Number",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "remove": "Remove"
+  },
+  "messages": {
     "user_data_not_found": "User data not found",
     "n_a": "N/A",
     "image_uploaded": "Image Uploaded Successfully",
     "image_removed": "Image Removed Successfully",
     "edited_successfully": "Edited successfully!"
+  },
+  "events": {
+    "no_events": "No Events",
+    "favorites": "FAVORITES",
+    "fav_list_empty": "Your Favorite List is Empty",
+    "error_with_state": "Error with state:",
+    "notifications": "NOTIFICATIONS",
+    "error": "Error",
+    "notification_settings": "NOTIFICATION SETTINGS",
+    "error_loading_settings": "Error loading settings",
+    "retry": "Retry",
+    "schedule": "SCHEDULE",
+    "cancel": "Cancel",
+    "book": "Book",
+    "full": "Full",
+    "available_seats_completed": "All Available Seats has Completed",
+    "gmaps_error": "Could not open Google Maps",
+    "no_participates": "No Participates Yet",
+    "event_removed": "Event Removed from Saved List",
+    "event_added": "Event Added to Saved List",
+    "hello": "Hello",
+    "show_all_notifications": "Show all Notifications",
+    "booked_events_reminder": "Booked Events Reminder",
+    "favorite_events_reminder": "Favorite Events Reminder",
+    "calendar": "CALENDAR",
+    "theme": "Theme",
+    "language": "Language"
   }
-          
-        
-        
-      
-    
-  
-  
 }

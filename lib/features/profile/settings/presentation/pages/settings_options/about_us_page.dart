@@ -8,9 +8,9 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-    final textColor = isDarkMode ? kWhite : kMainDark;
-    final detailsColor = isDarkMode ? kLightGrey : kMainDark;
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
+    final detailsColor = isDarkMode ? kLightGrey : kPrimaryDark;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -30,7 +30,9 @@ class AboutUsPage extends StatelessWidget {
                         Icons.arrow_back_ios,
                         color: textColor,
                         size: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ?15.w : 21.w,
+                                Orientation.landscape
+                            ? 15.w
+                            : 21.w,
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -39,8 +41,10 @@ class AboutUsPage extends StatelessWidget {
                     Spacer(),
                     Text('about.title'.tr(),
                         style: TextStyle(
-                            fontSize:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ?12.sp: 17.sp,
+                            fontSize: MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? 12.sp
+                                : 17.sp,
                             fontWeight: FontWeight.bold,
                             color: textColor)),
                     Spacer(),
@@ -56,7 +60,9 @@ class AboutUsPage extends StatelessWidget {
                   style: TextStyle(
                     color: detailsColor,
                     fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ?10.sp:14.sp,
+                            Orientation.landscape
+                        ? 10.sp
+                        : 14.sp,
                     // height: 1.6,
                   ),
                 ),
@@ -74,10 +80,12 @@ class AboutUsPage extends StatelessWidget {
   Widget _illustration(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 300.w: 260.w,
-        height:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 250.h: 200.h,
+        width: MediaQuery.of(context).orientation == Orientation.landscape
+            ? 300.w
+            : 260.w,
+        height: MediaQuery.of(context).orientation == Orientation.landscape
+            ? 250.h
+            : 200.h,
         child: SvgPicture.asset(
           'assets/images/about.svg',
           fit: BoxFit.contain, // Adjust fit
@@ -88,12 +96,13 @@ class AboutUsPage extends StatelessWidget {
 
   Widget _appName(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final textColor = isDarkMode ? kWhite : kMainDark;
+    final textColor = isDarkMode ? kWhite : kPrimaryDark;
     return Text(
       'about.name'.tr(),
       style: TextStyle(
-        fontSize:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 20.sp:25.sp,
+        fontSize: MediaQuery.of(context).orientation == Orientation.landscape
+            ? 20.sp
+            : 25.sp,
         fontWeight: FontWeight.bold,
         color: textColor,
         //  fontFamily: "Poppins",

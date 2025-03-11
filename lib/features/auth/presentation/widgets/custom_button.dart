@@ -29,38 +29,41 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: isLoading ? Colors.grey : kButton, // Using kHeader color
+          backgroundColor:
+              isLoading ? Colors.grey : kButton, // Using kHeader color
           padding: EdgeInsets.symmetric(
             vertical: 12.h,
             horizontal: 24.w,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.r), // More subtle rounded corners
+            borderRadius:
+                BorderRadius.circular(30.r), // More subtle rounded corners
           ),
           elevation: 0, // Flat design
           disabledBackgroundColor: Colors.grey.withValues(alpha: 0.5),
         ),
         child: isLoading
             ? SizedBox(
-          height: 20.h,
-          width: 20.h,
-          child: CircularProgressIndicator(
-            strokeWidth: 2.w,
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-        )
+                height: 20.h,
+                width: 20.h,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.w,
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
             : Center(
-              child: Text(
-                        text.toUpperCase(), // Uppercase text like in the image
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-              fontSize: fontSize ?? 16.sp,
-              fontWeight: FontWeight.w600,
-              color: kMainDark,
-              letterSpacing: 1, // Slight letter spacing for better readability
-                        ),
-                      ),
-            ),
+                child: Text(
+                  text.toUpperCase(), // Uppercase text like in the image
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: fontSize ?? 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: kPrimaryDark,
+                    letterSpacing:
+                        1, // Slight letter spacing for better readability
+                  ),
+                ),
+              ),
       ),
     );
   }

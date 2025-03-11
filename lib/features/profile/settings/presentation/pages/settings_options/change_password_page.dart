@@ -12,6 +12,8 @@ import 'package:eventure/core/utils/theme/colors.dart';
 // Import your Bloc file
 
 class ChangePasswordPage extends StatefulWidget {
+  const ChangePasswordPage({super.key});
+
   @override
   State<ChangePasswordPage> createState() => _ChangePasswordPageState();
 }
@@ -47,15 +49,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final backgroundColor = isDarkMode ? kMainDark : kWhite;
-     
+    final backgroundColor = isDarkMode ? kPrimaryDark : kWhite;
+
     return BlocProvider(
       create: (_) => ChangePasswordBloc(),
       child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
         listener: (context, state) {
           if (state is ChangePasswordSuccess) {
             CustomSnackBar.showSuccess(
-                context: context, message: 'changepass_screen.password_updated_success'.tr());
+                context: context,
+                message: 'changepass_screen.password_updated_success'.tr());
 
             Navigator.pop(context); // Close the screen on success
           } else if (state is ChangePasswordFailure) {
@@ -79,21 +82,28 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         SizedBox(height: 20.h),
                         buildHeader(context),
                         SizedBox(height: 25.h),
-                        _buildTextField('changepass_screen.enter_current_password'.tr(),
-                            'changepass_screen.current_password'.tr(), _currentPasswordController,
+                        _buildTextField(
+                            'changepass_screen.enter_current_password'.tr(),
+                            'changepass_screen.current_password'.tr(),
+                            _currentPasswordController,
                             isCurrent: true),
                         SizedBox(height: 15.h),
-                        _buildTextField('changepass_screen.new_password'.tr(),
-                        'changepass_screen.new_password'.tr(),
+                        _buildTextField(
+                            'changepass_screen.new_password'.tr(),
+                            'changepass_screen.new_password'.tr(),
                             _newPasswordController,
                             isNew: true),
                         SizedBox(height: 15.h),
-                        _buildTextField('changepass_screen.confirm_password'.tr(), 
-                        'changepass_screen.confirm_password'.tr(),
+                        _buildTextField(
+                            'changepass_screen.confirm_password'.tr(),
+                            'changepass_screen.confirm_password'.tr(),
                             _confirmPasswordController,
                             isConfirm: true),
-                        SizedBox(height:MediaQuery.of(context).orientation ==
-                          Orientation.landscape ?30.h: 40.h),
+                        SizedBox(
+                            height: MediaQuery.of(context).orientation ==
+                                    Orientation.landscape
+                                ? 30.h
+                                : 40.h),
                         _buildSaveButton(context),
                       ],
                     ),
@@ -114,8 +124,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       controller: controller,
       obscureText: true,
       validator: (value) {
-        if (value == null || value.isEmpty) return "$txt ${'changepass_screen.is_required'.tr()}";
-        if (value.length < 6) return 'changepass_screen.password_min_length'.tr();
+        if (value == null || value.isEmpty)
+          return "$txt ${'changepass_screen.is_required'.tr()}";
+        if (value.length < 6)
+          return 'changepass_screen.password_min_length'.tr();
         if (isConfirm &&
             _newPasswordController.text != _confirmPasswordController.text) {
           return 'changepass_screen.passwords_do_not_match'.tr();
@@ -141,11 +153,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       builder: (context, state) {
         return SizedBox(
           width: double.infinity,
-          height: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ? 80.h: 60.h,
+          height: MediaQuery.of(context).orientation == Orientation.landscape
+              ? 80.h
+              : 60.h,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: kHeader,
+              backgroundColor: kPrimaryLight,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(33.r),
               ),
@@ -156,10 +169,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             child: state is ChangePasswordLoading
                 ? CircularProgressIndicator(color: kWhite)
                 : Text(
-                   'changepass_screen.save'.tr(),
+                    'changepass_screen.save'.tr(),
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).orientation ==
-                          Orientation.landscape ?14.sp:18.sp,
+                                Orientation.landscape
+                            ? 14.sp
+                            : 18.sp,
                         fontWeight: FontWeight.bold,
                         color: kWhite),
                   ),
@@ -168,7 +183,4 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       },
     );
   }
-
- 
-  
 }

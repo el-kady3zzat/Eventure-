@@ -21,7 +21,7 @@ class EventsList extends StatelessWidget {
               child: InkWell(
                 onTap: () => Navigator.of(context)
                     .pushNamed('/details', arguments: events[index]),
-                splashColor: kHeader,
+                splashColor: kPrimaryLight,
                 child: ListTile(
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(200),
