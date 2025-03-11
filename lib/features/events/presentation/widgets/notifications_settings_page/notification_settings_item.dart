@@ -35,7 +35,7 @@ class NotificationSettingsItem extends StatelessWidget {
             value: state,
             onChanged: onChanged,
             activeColor: kWhite,
-            activeTrackColor: kHeader,
+            activeTrackColor: kPrimaryLight,
             inactiveThumbColor: kDetails,
             inactiveTrackColor: kWhite,
           ),

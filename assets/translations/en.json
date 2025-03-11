@@ -1,0 +1,223 @@
+{
+  "splash": {
+    "app_name": "EVENTURE",
+    "welcome": "Welcome to ",
+    "brand": "Eventure",
+    "description": "Discover amazing Events and create unforgettable memories",
+    "continue_home": "Continue to Home",
+    "get_started": "Get Started"
+  },
+  "admin": {
+    "dashboard_title": "Admin Dashboard"
+  },
+  "settings": {
+    "title": "Settings",
+    "logout": "Logout",
+    "cancel": "Cancel",
+    "logout_confirmation": "Are you sure you want to logout?",
+    "logout_failed": "Failed to logout: {0}",
+    "select_language": "Select Language",
+    "language_changed": "Language changed successfully",
+    "theme_changed": "Theme changed successfully"
+  },
+  "auth": {
+    "login": "Login",
+    "login_subtitle": "Please fill the details to continue.",
+    "email": "Email Address",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+    "dont_have_account": "Don't have an account?",
+    "sign_up": "Sign Up",
+    "or_continue_with": "Or continue with",
+    "continue_with_google": "Continue with Google",
+    "google_sign_in_failed": "Failed to sign in with Google: {0}",
+    "sign_up_subtitle": "Create your account to get started.",
+    "full_name": "Full Name",
+    "phone": "Phone Number (optional)",
+    "phone_hint": "+2 XXXX XXXX XXX (Optional)",
+    "already_have_account": "Already have an account?",
+    "fill_required_fields": "Please fill all required fields",
+    "confirm_password": "Confirm Password",
+    "reset_password": "Reset Password",
+    "reset_password_subtitle": "Enter your email address and we'll send you a link to reset your password.",
+    "submit": "SUBMIT",
+    "enter_valid_email": "Please enter a valid email address",
+    "password_requirements": {
+      "length": "At least 8 characters",
+      "uppercase": "At least one uppercase letter",
+      "lowercase": "At least one lowercase letter",
+      "number": "At least one number",
+      "special": "At least one special character",
+      "phone_verification": "Phone Verification",
+      "enter_verification_code": "Enter the verification code sent to:",
+      "verify": "VERIFY",
+      "didnt_receive_code": "Didn't receive the code?",
+      "resend_code": "RESEND CODE",
+      "resend_code_timer": "RESEND CODE IN {0} SECONDS",
+      "enter_valid_code": "Please enter a valid verification code"
+    },
+    "validation": {
+      "invalid_email": "Invalid email address",
+      "invalid_phone": "Invalid phone number",
+      "passwords_dont_match": "Passwords don't match",
+      "required_field": "This field is required",
+      "error": "An error occurred",
+      "empty_field": "Please enter your {field}",
+      "empty_fields": "Please enter: {fields}",
+      "and": "and {field}",
+      "required": "This field is required",
+      "name": {
+        "required": "Please enter your full name",
+        "letters_only": "Name should only contain English letters",
+        "min_length": "Name should be at least 3 characters",
+        "capitalize": "First letter must be capitalized"
+      },
+      "email": {
+        "required": "Please enter your email",
+        "invalid": "Please enter a valid email address"
+      },
+      "phone": {
+        "prefix": "Phone number must start with +2",
+        "digits_only": "Phone number can only contain digits after +2",
+        "exact_length": "Phone number must be exactly 11 digits after +2",
+        "max_length": "Phone number cannot exceed 11 digits after +2"
+      },
+      "password": {
+        "requirements": {
+          "length": "At least 8 characters",
+          "uppercase": "Contains uppercase letter",
+          "lowercase": "Contains lowercase letter",
+          "number": "Contains number",
+          "special": "Contains special character"
+        },
+        "not_match": "Passwords do not match"
+      },
+      "confirm_password": {
+        "required": "Please confirm your password",
+        "not_match": "Passwords do not match"
+      }
+    },
+    "messages": {
+      "checking_availability": "Checking availability...",
+      "email_registered": "This email is already registered",
+      "name_taken": "This name is already taken",
+      "checking_availability_error": "Error checking availability: {error}",
+      "signing_in": "Signing in...",
+      "welcome_back": "Welcome back, {name}!",
+      "welcome_google": "Hi, {name}!",
+      "creating_account": "Creating your account...",
+      "welcome_new": "Welcome, {name}!",
+      "signing_out": "Signing out...",
+      "passwords_not_match": "Passwords do not match",
+      "biometric_not_available": "Biometric authentication is not available",
+      "biometric_failed": "Biometric authentication failed",
+      "fill_required": "Please fill all required fields",
+      "invalid_name": "Invalid name format",
+      "invalid_email": "Invalid email format",
+      "invalid_password": "Password does not meet requirements",
+      "invalid_phone": "Invalid phone number format",
+      "checking_phone": "Checking phone number...",
+      "enter_valid_phone": "Please enter a valid phone number",
+      "phone_registered": "This phone number is already registered",
+      "sending_code": "Sending verification code...",
+      "code_sent": "Verification code sent successfully",
+      "test_phone_error": "This phone number is not available for testing. Please use a test phone number.",
+      "verification_failed": "Failed to send verification code",
+      "verification_failed_with": "Failed to send verification code: {error}",
+      "verifying_code": "Verifying code...",
+      "phone_verified": "Phone number verified successfully",
+      "invalid_code": "Invalid verification code",
+      "verification_error": "Failed to verify code: {error}",
+      "google_signin": "Signing in with Google...",
+      "google_signin_failed": "Google sign in failed",
+      "google_signin_error": "Failed to sign in with Google: {error}",
+      "reset_password_sending": "Sending reset password email...",
+      "reset_password_sent": "Password reset email sent successfully",
+      "reset_password_failed": "Failed to send reset email",
+      "reset_password_error": "Failed to send reset email: {error}",
+      "fill_all_fields": "Please fill all fields"
+    },
+    "fields": {
+      "full_name": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirm_password": "Confirm Password"
+    }
+  },
+  "settings_screen": {
+    "settings": "SETTINGS",
+    "notification_settings": "Notification settings",
+    "change_password": "Change Password",
+    "contact_us": "Contact US",
+    "privacy_policy": "Privacy Policy",
+    "about_us": "About US",
+    "logout": "LOGOUT"
+  },
+  "changepass_screen": {
+    "change_password": "Change Password",
+    "current_password": "Current Password",
+    "enter_current_password": "Enter Current Password",
+    "new_password": "New Password",
+    "confirm_password": "Confirm Password",
+    "save": "SAVE",
+    "password_min_length": "Password must be at least 6 characters",
+    "passwords_do_not_match": "Passwords do not match",
+    "is_required": "is required",
+    "password_updated_success": "Password updated successfully!"
+  },
+  "privacy": {
+    "title": "PRIVACY POLICY",
+    "content": "Welcome to Eventure, your go-to app for discovering and managing events effortlessly. Your privacy is important to us, and this policy explains how we collect, use, and safeguard your data.\n\n1. Information We Collect\n- Personal details (name, email, phone number) when you sign up.\n- Events you save, book, or mark as favorites.\n- Calendar-based event preferences and interactions.\n- Profile information, including edited data and uploaded images.\n- Device and usage data to enhance your experience.\n\n2. How We Use Your Information\n- To personalize your event recommendations.\n- To enable event booking, saving, and calendar-based filtering.\n- To send notifications about new and upcoming events.\n- To improve app functionality based on user engagement.\n\n3. Sharing Your Information\n- We do not sell your personal data to third parties.\n- We may share anonymized data with trusted partners to enhance our services.\n\n4. Security Measures\n- We implement encryption and secure storage to protect your data.\n- Only authorized personnel have access to sensitive information.\n\nBy using Eventure, you agree to this Privacy Policy. If you have any concerns or questions, please contact our support team."
+  },
+  "about": {
+    "title": "ABOUT US",
+    "content": "Eventure is your ultimate event discovery and management app. Whether you're looking for exciting events, saving your favorites, or booking your next experience, Eventure makes it easy. With calendar-based event filtering, real-time notifications, and a personalized profile, we ensure you never miss out on what matters most to you. Seamlessly browse, save, and enjoy events with Eventure – your gateway to unforgettable experiences.",
+    "name": "Eventure"
+  },
+  "profile": {
+    "title": "PROFILE",
+    "edit": "Edit PROFILE",
+    "saved_events": "Saved Events",
+    "my_data": "My Data",
+    "full_name": "Your Name",
+    "email": "Your Email",
+    "phone": "Your Phone Number",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "remove": "Remove"
+  },
+  "messages": {
+    "user_data_not_found": "User data not found",
+    "n_a": "N/A",
+    "image_uploaded": "Image Uploaded Successfully",
+    "image_removed": "Image Removed Successfully",
+    "edited_successfully": "Edited successfully!"
+  },
+  "events": {
+    "no_events": "No Events",
+    "favorites": "FAVORITES",
+    "fav_list_empty": "Your Favorite List is Empty",
+    "error_with_state": "Error with state:",
+    "notifications": "NOTIFICATIONS",
+    "error": "Error",
+    "notification_settings": "NOTIFICATION SETTINGS",
+    "error_loading_settings": "Error loading settings",
+    "retry": "Retry",
+    "schedule": "SCHEDULE",
+    "cancel": "Cancel",
+    "book": "Book",
+    "full": "Full",
+    "available_seats_completed": "All Available Seats has Completed",
+    "gmaps_error": "Could not open Google Maps",
+    "no_participates": "No Participates Yet",
+    "event_removed": "Event Removed from Saved List",
+    "event_added": "Event Added to Saved List",
+    "hello": "Hello",
+    "show_all_notifications": "Show all Notifications",
+    "booked_events_reminder": "Booked Events Reminder",
+    "favorite_events_reminder": "Favorite Events Reminder",
+    "calendar": "CALENDAR",
+    "theme": "Theme",
+    "language": "Language"
+  }
+}

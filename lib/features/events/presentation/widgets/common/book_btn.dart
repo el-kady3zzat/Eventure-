@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
@@ -48,10 +49,10 @@ class BookBtn extends StatelessWidget {
                 ButtonStyle(backgroundColor: WidgetStatePropertyAll(kButton)),
             child: Text(
               isInBook
-                  ? 'Un Book'
+                  ? 'events.cancel'.tr()
                   : hasSeats
-                      ? 'Book'
-                      : 'Full',
+                      ? 'events.book'.tr()
+                      : 'events.full'.tr(),
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -83,7 +84,7 @@ class BookBtn extends StatelessWidget {
     // If user NOT Registered and event has No seats then show message
     else {
       if (context.mounted) {
-        UI.infoSnack(context, 'All Available Seats has Completed');
+        UI.infoSnack(context, 'events.available_seats_completed'.tr());
       }
     }
   }

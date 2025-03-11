@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/nav_bar/nav_bar_cubit.dart';
@@ -14,11 +15,13 @@ class NavBar extends StatelessWidget {
     return BlocBuilder<NavBarCubit, int>(
       builder: (context, pageIndex) {
         SizeConfig.mContext = context;
+        UI.context = context;
+
         return AnimatedBottomNavigationBar(
           height: SizeConfig.size(p: 65.h, l: 95.h),
-          backgroundColor: kMainDark,
-          activeColor: kHeader,
-          inactiveColor: Colors.white70,
+          backgroundColor: UI.isDarkMode() ? kPrimaryDark : kPrimaryLight,
+          activeColor: UI.isDarkMode() ? kPrimaryLight : kButton,
+          inactiveColor: kWhite,
           iconSize: SizeConfig.size(p: 30, l: 25),
           icons: [
             Icons.dashboard_rounded,

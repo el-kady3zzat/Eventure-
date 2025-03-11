@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/calendar/calendar_bloc.dart';
+import 'package:eventure/features/events/presentation/widgets/common/pages_header.dart';
 import 'package:eventure/features/events/presentation/widgets/schedule_page/calendar_grid.dart';
 import 'package:eventure/features/events/presentation/widgets/schedule_page/events_list.dart';
 import 'package:eventure/features/events/presentation/widgets/schedule_page/grid_header.dart';
@@ -15,15 +17,15 @@ import 'package:eventure/injection.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class SchedulePage extends StatelessWidget {
-  SchedulePage({super.key});
-
-  final Map<int, FocusNode> focusNodes = {};
+  const SchedulePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    UI.context = context;
+    SizeConfig.mContext = context;
+
     return Scaffold(
-      backgroundColor: kMainLight,
-      // appBar: CalendarAppBar(),
+      backgroundColor: UI.isDarkMode() ? kSecondaryDark : kPrimaryLight,
       body: SafeArea(
         child: BlocProvider(
           create: (_) => getIt<CalendarCubit>(),
@@ -37,17 +39,7 @@ class SchedulePage extends StatelessWidget {
                   children: [
                     SizedBox(
                       height: SizeConfig.size(p: 70.h, l: 100.h),
-                      child: Center(
-                        child: Text(
-                          'SCHEDULE',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: SizeConfig.size(p: 18.sp, l: 18.sp),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                      child: PagesHeader(title: 'events.schedule'.tr()),
                     ),
                     SizedBox(height: 10),
                     GridHeader(currentMonth: currentMonth),

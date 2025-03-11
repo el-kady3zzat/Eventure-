@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/notification_settings/notification_settings_bloc.dart';
@@ -17,14 +18,17 @@ class NotificationsSettingsPage extends StatelessWidget {
     SizeConfig.mContext = context;
 
     return Scaffold(
-      backgroundColor: kMainLight,
+      backgroundColor: kSecondaryDark,
       body: BlocProvider(
         create: (context) =>
             getIt<NotificationSettingsBloc>()..add(FetchNotificationSettings()),
         child: SafeArea(
           child: Column(
             children: [
-              PagesHeader(title: 'NOTIFICATION SETTINGS', hasBackBtn: true),
+              PagesHeader(
+                title: 'events.notification_settings'.tr(),
+                hasBackBtn: true,
+              ),
               Stack(
                 children: [
                   Container(
@@ -57,7 +61,7 @@ class NotificationsSettingsPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Error loading settings',
+                                'events.error_loading_settings'.tr(),
                                 style: TextStyle(
                                     color: Colors.red, fontSize: 16.sp),
                               ),
@@ -68,14 +72,14 @@ class NotificationsSettingsPage extends StatelessWidget {
                                       .read<NotificationSettingsBloc>()
                                       .add(FetchNotificationSettings());
                                 },
-                                child: Text('Retry'),
+                                child: Text('events.retry'.tr()),
                               ),
                             ],
                           );
                         } else {
                           return Center(
                             child: Text(
-                              'Error loading settings',
+                              'events.error_loading_settings'.tr(),
                               style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 16.sp,
@@ -98,7 +102,7 @@ class NotificationsSettingsPage extends StatelessWidget {
                         ),
                         child: Icon(
                           Icons.notifications_outlined,
-                          color: kHeader,
+                          color: kPrimaryLight,
                           size: SizeConfig.size(p: 25.h, l: 50.h),
                         ),
                       ),

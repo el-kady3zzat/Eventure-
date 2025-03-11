@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
@@ -16,7 +17,7 @@ class Address extends StatelessWidget {
 
     return Card(
       margin: REdgeInsets.symmetric(vertical: 16),
-      color: kMainLight,
+      color: kSecondaryDark,
       child: Padding(
         padding: REdgeInsets.symmetric(horizontal: 12),
         child: SizedBox(
@@ -62,7 +63,7 @@ class Address extends StatelessWidget {
     try {
       await launchUrl(googleMapsUrl);
     } catch (e) {
-      UI.errorSnack(context, "Could not open Google Maps");
+      UI.errorSnack(context, 'events.gmaps_error'.tr());
     }
   }
 }

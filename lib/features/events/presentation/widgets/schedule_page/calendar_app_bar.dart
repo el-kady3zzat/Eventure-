@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class CalendarAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return Card(
       elevation: 10,
-      shadowColor: kHeader,
+      shadowColor: kPrimaryLight,
       margin: REdgeInsets.all(0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -28,7 +29,7 @@ class CalendarAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       child: AppBar(
-        backgroundColor: kMainDark,
+        backgroundColor: kPrimaryDark,
         toolbarHeight: mainHeight,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -38,7 +39,7 @@ class CalendarAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Calendar',
+          'events.calendar'.tr(),
           style: TextStyle(
             fontSize: SizeConfig.size(p: 18.sp, l: 8.sp),
             color: Colors.white,

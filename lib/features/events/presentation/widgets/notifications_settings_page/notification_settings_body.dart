@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/notification_settings/notification_settings_bloc.dart';
 import 'package:eventure/features/events/presentation/widgets/notifications_settings_page/notification_settings_item.dart';
@@ -13,7 +14,7 @@ class NotificationSettingsItems extends StatelessWidget {
     return Column(
       children: [
         NotificationSettingsItem(
-          title: 'Show all Notifications',
+          title: 'events.show_all_notifications'.tr(),
           state: settings['general_channel'] ?? true,
           onChanged: (val) {
             context.read<NotificationSettingsBloc>().add(
@@ -24,9 +25,9 @@ class NotificationSettingsItems extends StatelessWidget {
                 );
           },
         ),
-        Divider(color: kMainDark, thickness: 1.5),
+        Divider(color: kPrimaryDark, thickness: 1.5),
         NotificationSettingsItem(
-          title: 'Booked Events Reminder',
+          title: 'events.booked_events_reminder'.tr(),
           state: settings['booked_events_channel'] ?? true,
           onChanged: (val) {
             context.read<NotificationSettingsBloc>().add(
@@ -38,7 +39,7 @@ class NotificationSettingsItems extends StatelessWidget {
           },
         ),
         NotificationSettingsItem(
-          title: 'Favorite Events Reminder',
+          title: 'events.favorite_events_reminder'.tr(),
           state: settings['favorite_events_channel'] ?? true,
           onChanged: (val) {
             context.read<NotificationSettingsBloc>().add(

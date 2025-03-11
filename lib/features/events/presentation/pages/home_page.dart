@@ -3,13 +3,13 @@ import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/book_btn/book_btn_bloc.dart';
 import 'package:eventure/features/events/presentation/blocs/favorite_btn/favorite_btn_bloc.dart';
 import 'package:eventure/features/events/presentation/blocs/nav_bar/nav_bar_cubit.dart';
-import 'package:eventure/features/events/presentation/pages/notifications_settings_page.dart';
 import 'package:eventure/features/events/presentation/pages/schedule_page.dart';
 import 'package:eventure/features/events/presentation/pages/events_page.dart';
 
 import 'package:eventure/features/events/presentation/pages/favorite_page.dart';
 
 import 'package:eventure/features/events/presentation/widgets/home_page/nav_bar.dart';
+import 'package:eventure/features/profile/settings/presentation/pages/settings_page.dart';
 import 'package:eventure/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
     return BlocProvider(
       create: (_) => getIt<NavBarCubit>(),
       child: Scaffold(
-        backgroundColor: kMainLight,
+        backgroundColor: kSecondaryDark,
         bottomNavigationBar: NavBar(),
         body: BlocBuilder<NavBarCubit, int>(
           builder: (context, pageIndex) {
@@ -47,8 +47,7 @@ class HomePage extends StatelessWidget {
                 child: FavoritePage(),
               );
             } else {
-              // return SettingsPage();
-              return NotificationsSettingsPage();
+              return SettingsPage();
             }
           },
         ),

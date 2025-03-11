@@ -31,7 +31,7 @@ class FavoriteBtn extends StatelessWidget {
                   : false;
               return Icon(
                 isInFavorite ? Icons.favorite : Icons.favorite_border,
-                color: isInFavorite ? kHeader : null,
+                color: isInFavorite ? kPrimaryLight : null,
                 size: SizeConfig.size(p: 20.h, l: 35.h),
               );
             },

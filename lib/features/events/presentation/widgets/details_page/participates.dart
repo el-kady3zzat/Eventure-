@@ -1,5 +1,6 @@
 import 'package:avatar_stack/animated_avatar_stack.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/users_images/users_images_bloc.dart';
@@ -42,9 +43,11 @@ class Participates extends StatelessWidget {
                       width: SizeConfig.size(p: 0.4.sw, l: 0.5.sh),
                       avatars: [
                         for (var img in usersImages)
-                          CachedNetworkImageProvider(img),
+                          img.isNotEmpty
+                              ? CachedNetworkImageProvider(img)
+                              : AssetImage('assets/images/logo.webp'),
                       ],
-                      borderColor: kHeader,
+                      borderColor: kPrimaryLight,
                       borderWidth: 2.0,
                     ),
                   )
@@ -52,7 +55,7 @@ class Participates extends StatelessWidget {
                     height: SizeConfig.size(p: 40.h, l: 50.h),
                     child: Center(
                       child: Text(
-                        'No Participates Yet',
+                        'events.no_participates'.tr(),
                         style: TextStyle(
                           fontSize: SizeConfig.size(p: 14.sp, l: 6.sp),
                           fontWeight: FontWeight.bold,
