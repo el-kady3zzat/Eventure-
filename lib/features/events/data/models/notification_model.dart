@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eventure/features/events/domain/entities/notification.dart';
 
-class NotificationModel extends Notification {
+class NotificationModel extends EventureNotification {
   const NotificationModel({
     required super.id,
     required super.title,

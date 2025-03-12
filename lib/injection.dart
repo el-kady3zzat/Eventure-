@@ -45,6 +45,7 @@ import 'package:eventure/features/events/presentation/blocs/scroll/scroll_bloc.d
 import 'package:eventure/features/events/presentation/blocs/user_data/user_data_cubit.dart';
 import 'package:eventure/features/events/presentation/blocs/users_images/users_images_bloc.dart';
 import 'package:eventure/features/splash/presentation/bloc/splash_bloc.dart';
+import 'package:eventure/notification_handler.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -65,18 +66,27 @@ void init() {
   getIt.registerLazySingleton<FirebaseMessaging>(
     () => FirebaseMessaging.instance,
   );
-//splash
-  getIt.registerFactory(() => SplashBloc(
-    authService: getIt<IAuthService>(),
-    userRepository: getIt<IUserRepository>(),
-  ));
+
+  getIt
+      .registerSingleton<NotificationHandler>(NotificationHandler())
+      .initialize();
+
+  getIt
+      .registerSingleton<LocalNotificationSettings>(LocalNotificationSettings())
+      .init();
 
   // Auth Feature //////////////////////////////////////////////////////////////
 
+  //splash
+  getIt.registerFactory(() => SplashBloc(
+        authService: getIt<IAuthService>(),
+        userRepository: getIt<IUserRepository>(),
+      ));
+
   getIt.registerFactory(() => AuthBloc(
-    authService: getIt<IAuthService>(),
-    biometricService: getIt<IBiometricService>(),
-  ));
+        authService: getIt<IAuthService>(),
+        biometricService: getIt<IBiometricService>(),
+      ));
   getIt.registerSingleton<IUserRepository>(
     FirebaseUserRepository(),
   );
@@ -90,41 +100,12 @@ void init() {
   getIt.registerSingleton<IBiometricService>(
     LocalBiometricService(),
   );
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
   //////////////////////////////////////////////////////////////////////////////
 
 //// Events Feature ////////////////////////////////////////////////////////////
 
   // Data Sources //////////////////////////////////////////////////////////////
   getIt.registerSingleton<EventDatasource>(EventDatasource());
-  getIt
-      .registerSingleton<LocalNotificationSettings>(LocalNotificationSettings())
-      .init();
 
   // Repositories //////////////////////////////////////////////////////////////
   getIt.registerSingleton<EventRepo>(EventRepoImpl());

@@ -218,6 +218,7 @@
     "favorite_events_reminder": "Favorite Events Reminder",
     "calendar": "CALENDAR",
     "theme": "Theme",
-    "language": "Language"
+    "language": "Language",
+    "no_notifications": "You have no notifications"
   }
 }

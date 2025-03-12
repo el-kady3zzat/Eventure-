@@ -1,3 +1,4 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/widgets/common/img.dart';
 import 'package:eventure/features/events/domain/entities/event.dart';
@@ -11,18 +12,34 @@ class EventsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UI.context = context;
+
     return SizedBox(
       height: 160.h,
       child: ListView.builder(
-          itemCount: events.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: REdgeInsets.only(bottom: 8.0),
-              child: InkWell(
-                onTap: () => Navigator.of(context)
-                    .pushNamed('/details', arguments: events[index]),
-                splashColor: kPrimaryLight,
+        itemCount: events.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: REdgeInsets.only(bottom: 8.0),
+            child: InkWell(
+              onTap: () => Navigator.of(context)
+                  .pushNamed('/details', arguments: events[index]),
+              splashColor: kPrimaryLight,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: UI.isDarkMode() ? kWhite : kPrimaryLight,
+                      width: 1, // Thickness of the underline
+                    ),
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                ),
                 child: ListTile(
+                  contentPadding: REdgeInsets.fromLTRB(8, 0, 8, 4),
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(200),
                     child: SizedBox(
@@ -33,21 +50,36 @@ class EventsList extends StatelessWidget {
                   ),
                   title: Text(
                     events[index].title,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                      color: UI.isDarkMode() ? kWhite : kPrimaryLight,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   trailing: Text(
                     formatCustomDate(
                       events[index].dateTime,
                     ),
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
+                      color: UI.isDarkMode() ? kWhite : kPrimaryLight,
+                      fontSize: 12.sp,
                     ),
                   ),
+                  // shape: UnderlineInputBorder(
+                  //   borderRadius:
+                  // BorderRadius.only(
+                  //     bottomLeft: Radius.circular(20),
+                  //     bottomRight: Radius.circular(20),
+                  //   ),
+                  //   borderSide: BorderSide(
+                  //     color: UI.isDarkMode() ? kWhite : kPrimaryLight,
+                  //   ),
+                  // ),
                 ),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 

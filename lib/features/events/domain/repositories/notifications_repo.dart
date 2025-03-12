@@ -10,5 +10,5 @@ abstract class NotificationRepository {
   );
   Future<Either<Failure, Map<String, bool>>> getNotificationSettings();
 
-  Future<Either<Failure, List<Notification>>> getNotifications();
+  Future<Either<Failure, List<EventureNotification>>> getNotifications();
 }

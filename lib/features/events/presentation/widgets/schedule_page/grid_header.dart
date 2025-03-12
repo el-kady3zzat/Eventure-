@@ -1,4 +1,6 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
+import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/calendar_design/calendar_cubit.dart';
 import 'package:eventure/features/events/presentation/widgets/schedule_page/arrow.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class GridHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +34,7 @@ class GridHeader extends StatelessWidget {
           style: TextStyle(
             fontSize: SizeConfig.size(p: 16.sp, l: 6.sp),
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: UI.isDarkMode() ? kWhite : kPrimaryLight,
           ),
         ),
         Arrow(

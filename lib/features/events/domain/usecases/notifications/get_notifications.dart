@@ -7,7 +7,7 @@ import 'package:eventure/injection.dart';
 class GetNotificationsUseCase {
   final notificationRepo = getIt<NotificationRepository>();
 
-  Future<Either<Failure, List<Notification>>> call() {
+  Future<Either<Failure, List<EventureNotification>>> call() {
     return notificationRepo.getNotifications();
   }
 }

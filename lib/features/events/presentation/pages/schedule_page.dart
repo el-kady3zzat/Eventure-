@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
-import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/blocs/calendar/calendar_bloc.dart';
 import 'package:eventure/features/events/presentation/widgets/common/pages_header.dart';
 import 'package:eventure/features/events/presentation/widgets/schedule_page/calendar_grid.dart';
@@ -25,7 +24,6 @@ class SchedulePage extends StatelessWidget {
     SizeConfig.mContext = context;
 
     return Scaffold(
-      backgroundColor: UI.isDarkMode() ? kSecondaryDark : kPrimaryLight,
       body: SafeArea(
         child: BlocProvider(
           create: (_) => getIt<CalendarCubit>(),
@@ -37,16 +35,15 @@ class SchedulePage extends StatelessWidget {
                 height: 1.sh,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: SizeConfig.size(p: 70.h, l: 100.h),
-                      child: PagesHeader(title: 'events.schedule'.tr()),
-                    ),
+                    PagesHeader(title: 'events.schedule'.tr()),
                     SizedBox(height: 10),
                     GridHeader(currentMonth: currentMonth),
                     SizedBox(height: SizeConfig.size(p: 20, l: 10)),
                     BlocProvider(
-                      create: (context) =>
-                          CalendarBloc()..add(FetchCalendarEvents()),
+                      create: (context) => CalendarBloc()
+                        ..add(
+                          FetchCalendarEvents(),
+                        ),
                       child: BlocConsumer<CalendarBloc, CalendarEventsState>(
                         listener: (context, state) {
                           if (state is CalendarError) {
@@ -90,11 +87,10 @@ class SchedulePage extends StatelessWidget {
                               ),
                             );
                           }
-                          return Container();
+                          return SizedBox();
                         },
                       ),
                     ),
-                    SizedBox(height: 10),
                   ],
                 ),
               );

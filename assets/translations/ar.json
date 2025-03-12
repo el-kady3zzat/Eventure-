@@ -218,6 +218,7 @@
     "favorite_events_reminder": "تذكير بالفعاليات المفضلة",
     "calendar": "CALENDAR",
     "theme": "المظهر",
-    "language": "اللغة"
+    "language": "اللغة",
+    "no_notifications": "ليس لديك إشعارات حتى الآن"
   }
 }
