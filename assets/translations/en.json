@@ -220,5 +220,12 @@
     "theme": "Theme",
     "language": "Language",
     "no_notifications": "You have no notifications"
-  }
+  },
+    "contact":{
+            
+              "title": "How can we help you?",
+              "description": "Have questions or need assistance? We're here to help! Reach out to us for support, feedback, or any inquiries about Eventure. Your experience matters to us!",
+              "call": "Call",
+              "mail": "Mail"
+            }
 }
