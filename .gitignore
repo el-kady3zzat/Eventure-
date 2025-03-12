@@ -44,8 +44,14 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+
+# Keystore file
+*.jks
+*.keystore
+
+# Signing configs
+android/app/upload-keystore.jks
+android/app/key.properties
+
 # Ignore env file
 .env
-
-# Ignore google-services file
-google-services.json

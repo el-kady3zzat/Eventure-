@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "468272272410",
+    "project_id": "eventure-b3ff2",
+    "storage_bucket": "eventure-b3ff2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468272272410:android:480cd888641704f5cfada3",
+        "android_client_info": {
+          "package_name": "com.example.eventure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468272272410-trmq7h1uin8mc6r9vuap2k96b87lbrlg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eventure",
+            "certificate_hash": "dea8ab070b2d02fee5526fa5926b249c7e3a8c8d"
+          }
+        },
+        {
+          "client_id": "468272272410-6dd3041s0b4ri4htf43p97ilir3qavks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI_VV8yGn_zQFV76yVHFEM0d_MDGUvdBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468272272410-6dd3041s0b4ri4htf43p97ilir3qavks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "468272272410-3sj2d0f1vj12e09l1aqsa7thrrgnbbus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eventure"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468272272410:android:316df9d7eba6e3d4cfada3",
+        "android_client_info": {
+          "package_name": "com.k3mobile.eventure"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468272272410-6dd3041s0b4ri4htf43p97ilir3qavks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI_VV8yGn_zQFV76yVHFEM0d_MDGUvdBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468272272410-6dd3041s0b4ri4htf43p97ilir3qavks.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "468272272410-3sj2d0f1vj12e09l1aqsa7thrrgnbbus.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eventure"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
