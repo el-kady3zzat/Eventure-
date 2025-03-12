@@ -27,7 +27,7 @@ class AdminApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Admin Dashboard',
+      title: 'Admin Dashboard ',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: EventsScreen(),
     );
