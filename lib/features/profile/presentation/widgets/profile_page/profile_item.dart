@@ -26,7 +26,7 @@ class ProfileItem extends StatelessWidget {
         isObscure == true ? txt : txt.replaceAll(RegExp(r"."), "*"),
         style: TextStyle(
           fontSize: MediaQuery.of(context).orientation == Orientation.landscape
-              ? 12.sp
+              ? 10.sp
               : 18.sp,
           fontWeight: FontWeight.w600,
           color: textColor,

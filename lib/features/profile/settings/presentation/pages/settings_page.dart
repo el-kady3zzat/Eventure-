@@ -1,15 +1,17 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/pages/notifications_settings_page.dart';
+import 'package:eventure/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
+import 'package:eventure/features/profile/presentation/pages/profile_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/about_us_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/change_password_page.dart';
-import 'package:eventure/features/profile/settings/presentation/pages/settings_options/contact_screen.dart';
+import 'package:eventure/features/profile/settings/presentation/pages/settings_options/contact_page.dart';
 import 'package:eventure/features/profile/settings/presentation/pages/settings_options/privacy_page.dart';
 import 'package:eventure/features/profile/settings/presentation/widgets/logout_button_widget.dart';
 import 'package:eventure/features/profile/settings/presentation/widgets/settings_item.dart';
 import 'package:eventure/features/profile/settings/presentation/widgets/settings_option_widget.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -35,7 +37,7 @@ class SettingsPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).orientation ==
                           Orientation.landscape
-                      ? 13.sp
+                      ? 12.sp
                       : 17.sp,
                   fontWeight: FontWeight.bold,
                   color: textColor,
@@ -54,6 +56,18 @@ class SettingsPage extends StatelessWidget {
                 ),
               ),
               SettingsOption(
+                icon: Icons.person,
+                title: 'settings_screen.profile'.tr(),
+                fun: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BlocProvider(
+                            create: (context) => ProfileBloc(),
+                            child: ProfilePage(),
+                          )),
+                ),
+              ),
+              SettingsOption(
                 icon: LucideIcons.fileLock,
                 title: 'settings_screen.change_password'.tr(),
                 fun: () => Navigator.push(
@@ -68,7 +82,7 @@ class SettingsPage extends StatelessWidget {
                 title: 'settings_screen.contact_us'.tr(),
                 fun: () => Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ContactUsScreen()),
+                  MaterialPageRoute(builder: (context) => ContactPage()),
                 ),
               ),
               SettingsOption(
