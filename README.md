@@ -1,5 +1,3 @@
-# Eventure 
-
 ## Overview
 
 Eventure is a Flutter-based mobile application designed to help organizations manage and communicate their events efficiently. It provides real-time updates, notifications, and event details through an interactive and user-friendly interface.
