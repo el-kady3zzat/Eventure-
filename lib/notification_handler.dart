@@ -1,6 +1,7 @@
 import 'package:eventure/features/events/data/datasources/event_datasource.dart';
 import 'package:eventure/features/events/data/datasources/local_notification_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:eventure/injection.dart';
 
@@ -64,7 +65,7 @@ class NotificationHandler {
     });
   }
 
-  static Future<void> initialize() async {
+  Future<void> initialize() async {
     await _fm.requestPermission();
 
     const androidSettings = AndroidInitializationSettings(
@@ -79,6 +80,8 @@ class NotificationHandler {
     await _registerFcmToken();
 
     setupFirebaseListeners();
+
+    debugPrint('=====\n${await _fm.getToken()}\n=====');
   }
 
   static Future<void> _registerFcmToken() async {

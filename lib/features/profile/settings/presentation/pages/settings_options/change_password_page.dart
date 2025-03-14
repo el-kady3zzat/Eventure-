@@ -102,7 +102,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                         SizedBox(
                             height: MediaQuery.of(context).orientation ==
                                     Orientation.landscape
-                                ? 30.h
+                                ? 50.h
                                 : 40.h),
                         _buildSaveButton(context),
                       ],
@@ -118,31 +118,54 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   }
 
   Widget _buildTextField(
-      String hintText, String txt, TextEditingController controller,
-      {bool isCurrent = false, bool isNew = false, bool isConfirm = false}) {
-    return TextFormField(
-      controller: controller,
-      obscureText: true,
-      validator: (value) {
-        if (value == null || value.isEmpty)
-          return "$txt ${'changepass_screen.is_required'.tr()}";
-        if (value.length < 6)
-          return 'changepass_screen.password_min_length'.tr();
-        if (isConfirm &&
-            _newPasswordController.text != _confirmPasswordController.text) {
-          return 'changepass_screen.passwords_do_not_match'.tr();
-        }
-        return null;
-      },
-      style: TextStyle(color: kWhite),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(color: kGrey, fontSize: 13.sp),
-        filled: true,
-        fillColor: kDetails,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(23.r),
-          borderSide: BorderSide.none,
+    String hintText,
+    String txt,
+    TextEditingController controller, {
+    bool isCurrent = false,
+    bool isNew = false,
+    bool isConfirm = false,
+  }) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 2.h), // Responsive spacing
+      child: TextFormField(
+        controller: controller,
+        obscureText: true,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "$txt ${'changepass_screen.is_required'.tr()}";
+          }
+          if (value.length < 6) {
+            return 'changepass_screen.password_min_length'.tr();
+          }
+          if (isConfirm &&
+              _newPasswordController.text != _confirmPasswordController.text) {
+            return 'changepass_screen.passwords_do_not_match'.tr();
+          }
+          return null;
+        },
+        style: TextStyle(
+            color: kWhite,
+            fontSize:
+                MediaQuery.of(context).orientation == Orientation.landscape
+                    ? 10.sp
+                    : 14.sp), // Responsive text
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(
+              vertical: 20.h, horizontal: 16.w), // Responsive padding
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: kGrey,
+              fontSize:
+                  MediaQuery.of(context).orientation == Orientation.landscape
+                      ? 9.sp
+                      : 13.sp), // Responsive hint
+          filled: true,
+          fillColor: kDetails,
+          border: OutlineInputBorder(
+            borderRadius:
+                BorderRadius.circular(23.r), // Responsive border radius
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );
@@ -154,8 +177,8 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         return SizedBox(
           width: double.infinity,
           height: MediaQuery.of(context).orientation == Orientation.landscape
-              ? 80.h
-              : 60.h,
+              ? 70.h
+              : 50.h,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: kPrimaryLight,
@@ -173,7 +196,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).orientation ==
                                 Orientation.landscape
-                            ? 14.sp
+                            ? 11.sp
                             : 18.sp,
                         fontWeight: FontWeight.bold,
                         color: kWhite),

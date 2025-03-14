@@ -29,7 +29,7 @@ class ProfileImage extends StatelessWidget {
           CircleAvatar(
               radius:
                   MediaQuery.of(context).orientation == Orientation.landscape
-                      ? 100.r
+                      ? 120.r
                       : 75.r,
               backgroundImage: img),
           InkWell(

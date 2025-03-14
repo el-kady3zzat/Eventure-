@@ -1,3 +1,4 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class PagesHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
 
     return !hasBackBtn
         ? SizedBox(
@@ -20,7 +22,7 @@ class PagesHeader extends StatelessWidget {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: kWhite,
+                  color: UI.isDarkMode() ? kWhite : kPrimaryLight,
                   fontSize: SizeConfig.size(p: 18.sp, l: 8.sp),
                   fontWeight: FontWeight.bold,
                 ),
@@ -37,7 +39,7 @@ class PagesHeader extends StatelessWidget {
                     title,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: UI.isDarkMode() ? kWhite : kPrimaryLight,
                       fontSize: SizeConfig.size(p: 18.sp, l: 8.sp),
                       fontWeight: FontWeight.bold,
                     ),
@@ -48,7 +50,7 @@ class PagesHeader extends StatelessWidget {
                 padding: REdgeInsets.only(left: 8),
                 icon: Icon(
                   Icons.arrow_back_ios_rounded,
-                  color: kWhite,
+                  color: UI.isDarkMode() ? kWhite : kPrimaryLight,
                   size: SizeConfig.size(p: 20.h, l: 40.h),
                 ),
                 onPressed: () {

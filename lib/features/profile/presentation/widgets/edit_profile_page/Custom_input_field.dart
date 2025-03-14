@@ -21,7 +21,9 @@ class CustomInputField extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(color: kGrey, fontSize: 13.sp),
+            style: TextStyle(color: kGrey, fontSize: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? 9.sp : 13.sp),
           ),
           SizedBox(height: 2.h),
           TextField(

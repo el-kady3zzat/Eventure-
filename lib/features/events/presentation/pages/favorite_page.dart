@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:eventure/core/utils/constants/dummy_data.dart';
 import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
-import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/presentation/widgets/common/event_card.dart';
 import 'package:eventure/features/events/presentation/blocs/favorite/favorite_bloc.dart';
 import 'package:eventure/features/events/presentation/widgets/common/pages_header.dart';
@@ -21,7 +20,7 @@ class FavoritePage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kSecondaryDark,
+        // backgroundColor: kSecondaryDark,
         body: SizedBox(
           height: 1.sh,
           child: Column(

@@ -19,7 +19,7 @@ class LogoutButton extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal:
                   MediaQuery.of(context).orientation == Orientation.landscape
-                      ? 18.w
+                      ? 12.w
                       : 24.w,
               vertical:
                   MediaQuery.of(context).orientation == Orientation.landscape
@@ -45,7 +45,7 @@ class LogoutButton extends StatelessWidget {
                 Icons.power_settings_new,
                 size:
                     MediaQuery.of(context).orientation == Orientation.landscape
-                        ? 20.w
+                        ? 16.w
                         : 24.w,
                 color: kDetails,
               ),
@@ -57,7 +57,7 @@ class LogoutButton extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: MediaQuery.of(context).orientation ==
                             Orientation.landscape
-                        ? 12.sp
+                        ? 10.sp
                         : 17.sp,
                     color: kDetails,
                   ),

@@ -13,7 +13,7 @@ Widget buildHeader(BuildContext context) {
         icon: Icon(Icons.arrow_back_ios,
             color: textColor,
             size: MediaQuery.of(context).orientation == Orientation.landscape
-                ? 17.w
+                ? 16.w
                 : 21.w),
         onPressed: () => Navigator.pop(context),
       ),

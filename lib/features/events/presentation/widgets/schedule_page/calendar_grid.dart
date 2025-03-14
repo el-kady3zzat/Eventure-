@@ -1,3 +1,4 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:eventure/features/events/domain/entities/event.dart';
@@ -13,6 +14,7 @@ class CalendarGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
 
     return GridView.builder(
       padding: REdgeInsets.symmetric(horizontal: 8),
@@ -44,12 +46,11 @@ class CalendarGrid extends StatelessWidget {
           onTap: () {
             if (hasEvent) {
               if (!SizeConfig.isPortrait()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Event: ${event!.title}")),
+                Navigator.of(context).pushNamed(
+                  '/details',
+                  arguments: event,
                 );
-                return;
               }
-              // clickedEvent.value = index + 1;
             }
           },
           child: Container(
@@ -62,7 +63,11 @@ class CalendarGrid extends StatelessWidget {
             child: Text(
               '${index + 1}',
               style: TextStyle(
-                color: hasEvent ? Colors.black : Colors.white,
+                color: hasEvent
+                    ? Colors.black
+                    : UI.isDarkMode()
+                        ? kWhite
+                        : kPrimaryLight,
                 fontWeight: FontWeight.bold,
               ),
             ),

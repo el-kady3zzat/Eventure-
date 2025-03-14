@@ -5,7 +5,7 @@ abstract class NotificationsState {}
 class NotificationsLoading extends NotificationsState {}
 
 class NotificationsLoaded extends NotificationsState {
-  final List<Notification> notifications;
+  final List<EventureNotification> notifications;
   NotificationsLoaded(this.notifications);
 }
 

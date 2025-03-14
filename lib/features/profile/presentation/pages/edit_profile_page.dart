@@ -193,12 +193,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.r),
                               ),
-                              padding: EdgeInsets.symmetric(vertical: 17.h),
+                              padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ?16.h:15.h),
                             ),
                             child: Text('changepass_screen.save'.tr(),
                                 style: TextStyle(
                                     color: kWhite,
-                                    fontSize: 16.sp,
+                                    fontSize: MediaQuery.of(context).orientation ==
+                              Orientation.landscape
+                          ? 11.sp:16.sp,
                                     fontWeight: FontWeight.bold)),
                           ),
                         );

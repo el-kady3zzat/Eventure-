@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class Notification extends Equatable {
+class EventureNotification extends Equatable {
   final String id;
   final String title;
   final String eventId;
   final DateTime timestamp;
 
-  const Notification({
+  const EventureNotification({
     required this.id,
     required this.title,
     required this.eventId,

@@ -42,7 +42,7 @@ class NotificationRepositoryImpl implements NotificationRepository {
   }
 
   @override
-  Future<Either<Failure, List<Notification>>> getNotifications() async {
+  Future<Either<Failure, List<EventureNotification>>> getNotifications() async {
     return await ds.getNotifications();
   }
 }

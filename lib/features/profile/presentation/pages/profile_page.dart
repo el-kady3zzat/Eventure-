@@ -52,7 +52,7 @@ class ProfilePageState extends State<ProfilePage> {
                       Icons.arrow_back_ios,
                       size: MediaQuery.of(context).orientation ==
                               Orientation.landscape
-                          ? 17.w
+                          ? 15.w
                           : 21.w,
                       color: textColor,
                     ),
@@ -77,7 +77,7 @@ class ProfilePageState extends State<ProfilePage> {
                       color: textColor,
                       size: MediaQuery.of(context).orientation ==
                               Orientation.landscape
-                          ? 18.sp
+                          ? 15.sp
                           : 25.w,
                     ),
                     onPressed: () {
@@ -153,7 +153,7 @@ class ProfilePageState extends State<ProfilePage> {
                                 color: textColor,
                                 fontSize: MediaQuery.of(context).orientation ==
                                         Orientation.landscape
-                                    ? 16.sp
+                                    ? 13.sp
                                     : 22.sp,
                                 fontWeight: FontWeight.bold))
                         : Center(

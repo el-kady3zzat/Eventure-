@@ -1,3 +1,4 @@
+import 'package:eventure/core/utils/helper/ui.dart';
 import 'package:eventure/core/utils/size/size_config.dart';
 import 'package:eventure/core/utils/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -11,17 +12,19 @@ class Arrow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.mContext = context;
+    UI.context = context;
+
     return SizedBox(
-      height: SizeConfig.size(p: 45.h, l: 80.h),
-      width: SizeConfig.size(p: 50.h, l: 85.h),
+      height: SizeConfig.size(p: 40.h, l: 80.h),
+      width: SizeConfig.size(p: 100.h, l: 200.h),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        color: kPrimaryLight,
+        color: UI.isDarkMode() ? kPrimaryLight : kButton,
         child: IconButton(
           icon: Icon(
             icon,
-            color: Colors.white,
-            size: SizeConfig.size(p: 15.h, l: 30.h),
+            color: kWhite,
+            size: SizeConfig.size(p: 22.sp, l: 10.sp),
           ),
           onPressed: onPress,
         ),
