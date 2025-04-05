@@ -121,3 +121,7 @@ Eventure utilizes [Provider/Riverpod/Bloc] for managing application state effici
 
 Eventure provides a seamless platform for organizations to engage with their audience through event updates, notifications, and interactive features. By leveraging Flutter and Firebase, it ensures a smooth cross-platform experience. Future enhancements could include features like shareable event flyers, gamification elements, and an advanced admin dashboard for better event management.
 
+## Demo
+
+https://drive.google.com/file/d/1W9l48BDrl2jcpsyuYGPRJFV_vXbtyCSZ/view?usp=sharing
+
