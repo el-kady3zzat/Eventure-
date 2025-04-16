@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:googleapis_auth/auth_io.dart' as auth;
@@ -36,9 +37,10 @@ class NotificationService {
     );
 
     final credentials = await auth.obtainAccessCredentialsViaServiceAccount(
-        auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
-        scopes,
-        client);
+      auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
+      scopes,
+      client,
+    );
     client.close();
     return credentials.accessToken.data;
   }
@@ -51,6 +53,7 @@ class NotificationService {
         .map((doc) => doc.data() as Map<String, dynamic>?)
         .where((data) => data != null && data.containsKey("fcmToken"))
         .map((data) => data!["fcmToken"] as String)
+        .toSet()
         .toList();
 
     return tokens;
@@ -63,7 +66,7 @@ class NotificationService {
         .get();
 
     if (!eventSnapshot.exists) {
-      print("Event not found.");
+      debugPrint("Event not found.");
       return [];
     }
 
@@ -71,7 +74,7 @@ class NotificationService {
         List<String>.from(eventSnapshot["registeredUsers"] ?? []);
 
     if (registeredUserIds.isEmpty) {
-      print("No registered users found for this event.");
+      debugPrint("No registered users found for this event.");
       return [];
     }
 
@@ -96,7 +99,7 @@ class NotificationService {
         .get();
 
     if (!eventSnapshot.exists) {
-      print("Event not found.");
+      debugPrint("Event not found.");
       return [];
     }
 
@@ -104,7 +107,7 @@ class NotificationService {
         List<String>.from(eventSnapshot["likedUsers"] ?? []);
 
     if (likedUserIds.isEmpty) {
-      print("No liked users found for this event.");
+      debugPrint("No liked users found for this event.");
       return [];
     }
 
@@ -122,25 +125,36 @@ class NotificationService {
     return tokens;
   }
 
-  Future<void> sendNotificationToAll() async {
+  Future<void> sendNotificationToAll(id, title, cover) async {
     final String accessToken = await getAccessToken();
     List<String> tokens = await getUsersTokens();
 
     if (tokens.isEmpty) {
-      print("No FCM tokens found.");
+      debugPrint("No FCM tokens found.");
       return;
     }
 
     for (String token in tokens) {
+      // final Map<String, dynamic> message = {
+      //   "message": {
+      //     "token": token,
+      //     "notification": {
+      //       "title": "New Event Created",
+      //       "body": "New Event Created Check it now"
+      //     },
+      //     "android": {
+      //       "notification": {"channel_id": "general_channel"}
+      //     }
+      //   }
+      // };
       final Map<String, dynamic> message = {
         "message": {
           "token": token,
-          "notification": {
-            "title": "New Event Cretaed",
-            "body": "New Event Created Check it now"
-          },
-          "android": {
-            "notification": {"channel_id": "general_chennel"}
+          "data": {
+            "title": "New Event Added",
+            "body": title,
+            "id": id,
+            "channel_id": "general_channel"
           }
         }
       };
@@ -156,9 +170,9 @@ class NotificationService {
       );
 
       if (response.statusCode == 200) {
-        print('Notification sent successfully to $token');
+        debugPrint('Notification sent successfully to $token');
       } else {
-        print('Failed to send notification to $token: ${response.body}');
+        debugPrint('Failed to send notification to $token: ${response.body}');
       }
     }
   }
@@ -168,20 +182,32 @@ class NotificationService {
     List<String> tokens = await getRegisteredUsersTokens(eventId);
 
     if (tokens.isEmpty) {
-      print("No registered users found for this event.");
+      debugPrint("No registered users found for this event.");
       return;
     }
 
     for (String token in tokens) {
+      // final Map<String, dynamic> message = {
+      //   "message": {
+      //     "token": token,
+      //     "notification": {
+      //       "title": "Event Reminder!",
+      //       "body": "An event you registered for is coming up. Don’t miss it!"
+      //     },
+      //     "android": {
+      //       "notification": {"channel_id": "booked_events_channel"}
+      //     }
+      //   }
+      // };
+
       final Map<String, dynamic> message = {
         "message": {
           "token": token,
-          "notification": {
+          "data": {
             "title": "Event Reminder!",
-            "body": "An event you registered for is coming up. Don’t miss it!"
-          },
-          "android": {
-            "notification": {"channel_id": "booked_events_channel"}
+            // "body": title,
+            "id": eventId,
+            "channel_id": "booked_events_channel"
           }
         }
       };
@@ -197,9 +223,9 @@ class NotificationService {
       );
 
       if (response.statusCode == 200) {
-        print('Notification sent successfully to registered user $token');
+        debugPrint('Notification sent successfully to registered user $token');
       } else {
-        print(
+        debugPrint(
             'Failed to send notification to registered user $token: ${response.body}');
       }
     }
@@ -210,20 +236,32 @@ class NotificationService {
     List<String> tokens = await getLikedUsersTokens(eventId);
 
     if (tokens.isEmpty) {
-      print("No liked users found for this event.");
+      debugPrint("No liked users found for this event.");
       return;
     }
 
     for (String token in tokens) {
+      // final Map<String, dynamic> message = {
+      //   "message": {
+      //     "token": token,
+      //     "notification": {
+      //       "title": "Event Reminder! ⏳",
+      //       "body": "An event you liked is starting tomorrow! Book it now."
+      //     },
+      //     "android": {
+      //       "notification": {"channel_id": "favorite_events_channel"}
+      //     }
+      //   }
+      // };
+
       final Map<String, dynamic> message = {
         "message": {
           "token": token,
-          "notification": {
+          "data": {
             "title": "Event Reminder! ⏳",
-            "body": "An event you liked is starting tomorrow! Book it now."
-          },
-          "android": {
-            "notification": {"channel_id": "favorite_events_channel"}
+            // "body": title,
+            "id": eventId,
+            "channel_id": "favorite_events_channel"
           }
         }
       };
@@ -239,11 +277,39 @@ class NotificationService {
       );
 
       if (response.statusCode == 200) {
-        print('Notification sent successfully to liked user $token');
+        debugPrint('Notification sent successfully to liked user $token');
       } else {
-        print(
+        debugPrint(
             'Failed to send notification to liked user $token: ${response.body}');
       }
     }
   }
 }
+
+// Cultural Exchange & Networking Night
+
+// An exclusive event for professionals and students to connect, share experiences, and discuss cultural exchange programs between Egypt and the U.S.
+
+// 10/5
+
+// //
+
+// U.S. Study Abroad & Scholarship Info Session
+
+// A dedicated session for students interested in studying in the U.S., covering visa processes, scholarship opportunities, and application tips.
+
+// 20/6
+
+// //
+
+// U.S.-Egypt Business & Innovation Summit
+
+// A high-level event bringing together entrepreneurs, investors, and business leaders to discuss U.S.-Egypt economic partnerships and innovations.
+
+// 15/7
+
+// //
+
+// U.S. Embassy Cairo, 5 Tawfik Diab Street, Garden City, Cairo
+
+// https://maps.google.com/?q=5%20Tawfik%20Diab%20Street%20Garden,%20City,%20Cairo%20Egypt

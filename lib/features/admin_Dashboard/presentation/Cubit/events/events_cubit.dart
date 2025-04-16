@@ -68,7 +68,7 @@ class EventsCubit extends Cubit<EventsState> {
         "likedUsers": [],
       });
 
-      await NotificationService().sendNotificationToAll();
+      await NotificationService().sendNotificationToAll(docId, title, cover);
 
       if (!isClosed) emit(AddEventSuccess());
     } catch (e) {

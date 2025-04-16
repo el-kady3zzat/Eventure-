@@ -14,75 +14,89 @@ class EventsScreen extends StatelessWidget {
       create: (context) => EventsCubit()..fetchEvents(),
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: kMainDark,
-          appBar: AppBar(
-            title: Text(
-              "All Events",
-              style: TextStyle(
-                  fontSize: 30, color: white, fontWeight: FontWeight.w900),
+          floatingActionButton: SizedBox(
+            height: 70,
+            width: 210,
+            child: FilledButton.icon(
+              onPressed: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddEvent()),
+                );
+              },
+              label: Text(
+                "Create Event",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              icon: Icon(Icons.event_rounded),
             ),
-            centerTitle: true,
-            backgroundColor: kMainDark,
-            actions: [
+          ),
+          backgroundColor: kMainDark,
+          body: Column(
+            children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FilledButton(
-                  onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddEvent()),
-                    );
-                  },
+                padding: const EdgeInsets.only(top: 40.0),
+                child: Center(
                   child: Text(
-                    "Add Event",
+                    'All Events',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                      fontSize: 25,
+                      color: white,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
-          body: LayoutBuilder(
-            builder: (context, constraints) {
-              int crossAxisCount = 3;
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    int crossAxisCount = 3;
 
-              if (constraints.maxWidth < 1200) {
-                crossAxisCount = 2;
-              }
-              if (constraints.maxWidth < 800) {
-                crossAxisCount = 1;
-              }
-
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                child: BlocBuilder<EventsCubit, EventsState>(
-                  builder: (context, state) {
-                    if (state is EventsLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is EventsError) {
-                      return Center(child: Text("Error: ${state.message}"));
-                    } else if (state is EventsLoaded) {
-                      return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          crossAxisSpacing: 50,
-                          mainAxisSpacing: 20,
-                          mainAxisExtent: 260,
-                        ),
-                        itemCount: state.events.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final event = state.events[index];
-                          return WebEventCard(event: event);
-                        },
-                      );
+                    if (constraints.maxWidth < 1250) {
+                      crossAxisCount = 2;
                     }
-                    return const Center(child: Text("No events found"));
+                    if (constraints.maxWidth < 850) {
+                      crossAxisCount = 1;
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 16),
+                      child: BlocBuilder<EventsCubit, EventsState>(
+                        builder: (context, state) {
+                          if (state is EventsLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state is EventsError) {
+                            return Center(
+                                child: Text("Error: ${state.message}"));
+                          } else if (state is EventsLoaded) {
+                            return GridView.builder(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: crossAxisCount,
+                                crossAxisSpacing: 50,
+                                mainAxisSpacing: 20,
+                                mainAxisExtent: 350,
+                              ),
+                              itemCount: state.events.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final event = state.events[index];
+                                return WebEventCard(event: event);
+                              },
+                            );
+                          }
+                          return const Center(child: Text("No events found"));
+                        },
+                      ),
+                    );
                   },
                 ),
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),
