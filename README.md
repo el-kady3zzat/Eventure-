@@ -123,5 +123,5 @@ Eventure provides a seamless platform for organizations to engage with their aud
 
 ## Demo
 
-https://drive.google.com/file/d/1W9l48BDrl2jcpsyuYGPRJFV_vXbtyCSZ/view?usp=sharing
+https://drive.google.com/file/d/1UF57A-aCETqaqNZ2psUJmYbpV9GDuo2i/view
 
